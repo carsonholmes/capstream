@@ -1,0 +1,11 @@
+-- Make sure to run this on new databases 
+-- It is needed for packages mysql or mysql2 to use with Node.js
+
+ALTER USER 'yourusername'@'localhost' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
+FLUSH PRIVILEGES
+
+-- You can do this for Dev environments, but best to use a different user for production environments
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'clover4ME!';
+FLUSH PRIVILEGES
+
+-- Also don't forget to seed the next-port table with some thing like 7001.

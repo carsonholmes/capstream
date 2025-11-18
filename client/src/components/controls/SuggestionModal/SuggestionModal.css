@@ -1,0 +1,20 @@
+div.suggestion-modal {
+    font-size: 1.75rem; 
+    justify-content: center;
+    padding: 1rem;
+    transform: translateY(-50%);
+}
+textarea.suggestion-text {
+    font-size: 1.25rem;
+    height: min(75vh, 200px);
+    margin-top: 1rem;
+    padding: 1rem;
+    resize: none;
+    text-align: left;
+    width: min(100%, 500px);
+}
+@media screen and (max-height: 400px) {
+    div.suggestion-modal {
+        height: 95%;
+    }
+}

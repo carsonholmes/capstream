@@ -1,0 +1,62 @@
+div.row-card-container {
+    cursor: grab;
+    display: flex;
+    overflow-x: auto;
+    position: relative;
+    scroll-snap-type: x mandatory;
+    /* touch-action: none; */
+    width: min(100%, 650px);
+}
+div.row-card-container::-webkit-scrollbar {
+    height: .5rem;
+}
+div.horizontal-card {
+    border-radius: 30px;
+    flex-shrink: 0;
+    font-size: var(--font-small);
+    position: relative;
+    touch-action: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 70%;
+}
+div.horizontal-card-margin {
+    margin: .5rem .5rem;
+}
+div.horizontal-card-margin-single-card {
+    margin: .5rem auto;
+}
+div.current {
+    background: white;
+    border: 2px solid var(--secondary-color);
+    scroll-snap-align: center;
+}
+div.adjacent {
+    background: white;
+    border: 2px solid rgb(190, 190, 190);
+}
+div.left {
+    margin-left: 20vw;
+}
+div.right {
+    margin-right: 20vw;
+}
+input.row-card {
+    cursor: grab;
+    font-size: var(--font-small);
+}
+input.row-card-grabbing {
+    cursor: grabbing;
+    font-size: var(--font-small);
+}
+p.row-item-description {
+    padding-top: .5rem;
+}
+div.row-card-radio {
+    margin: 1rem 0;
+}
+label.primary-label {
+    margin: 1rem;
+}

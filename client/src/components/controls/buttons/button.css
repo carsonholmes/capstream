@@ -1,0 +1,210 @@
+div.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 2rem 0 .5;
+  width: 100%;
+}
+button.standard {
+  --button-primary-width: min(22vw, 140px);
+  border: none;
+  border-radius: var(--button-border-radius);
+  color: white;
+  filter: var(--drop-shadow);
+  font-size: var(--font-x-small);
+  height: max(calc(var(--button-primary-width) / 5), 1.5rem);
+  margin: 1.5rem auto 0;
+  min-width: fit-content;
+  padding: .6vh 3vw !important;
+  transition: .3s ease-in-out;
+  width: var(--button-primary-width);
+}
+button.primary {
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-color), var(--secondary-color), var(--secondary-color)) 99% 0/400%;
+}
+button.standard:hover {
+  background-position: 0;
+  box-shadow: none;
+  cursor: pointer;
+  transform: none;
+}
+button.sign-cancel {
+  background: linear-gradient(90deg, var(--cancel-color-hover), var(--cancel-color-hover), var(--cancel-color), var(--cancel-color)) 99% 0/400%;
+}
+button.suggestion {
+  --button-suggestion-width: min(45vw, 250px);
+  height: calc(var(--button-suggestion-width) / 6);
+  position: relative;
+  width: var(--button-suggestion-width);
+  z-index: 0;
+}
+button.fit-content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  width: fit-content;
+}
+button.medium {
+  --button-medium-width: min(70vw, 400px);
+  height: calc(var(--button-medium-width) / 10);
+  width: var(--button-medium-width);
+}
+button.medium-small {
+  --button-medium-small-width: min(55vw, 250px);
+  height: calc(var(--button-medium-small-width) / 7);
+  width: var(--button-medium-small-width);
+}
+button.small {
+  font-size: var(--font-x-small);
+  padding: .25rem .5rem;
+  width: fit-content;
+  margin-bottom: -.1rem;
+}
+button.margin-top-button {
+  margin-top: .5rem;
+}
+button.modal {
+  --button-modal-width: min(30vw, 140px);
+  height: max(calc(var(--button-modal-width) / 5), 1.5rem);
+  margin: .5rem 0 .5rem;
+  width: var(--button-modal-width)
+}
+button.submit {
+  font-size: var(--font-medium);
+  height: 2.5rem;
+  margin: 1.5rem auto 0;
+  width: 90%;
+}
+button.reverse-gradient {
+  background: linear-gradient(90deg, var(--secondary-color), var(--secondary-color), var(--primary-color), var(--primary-color)) 99% 0/400%;
+}
+.icon-button, .dummy-icon-button {
+  align-items: center;
+  border-radius: var(--button-border-radius);
+  color: white;
+  display: flex;
+  font-size: var(--font-x-small);
+  justify-content: center;
+  margin: 0 .1rem .5rem;
+  min-width: fit-content;
+  padding: min(.5rem, 2vw);
+  width: min(100%, 130px);
+}
+.icon-button:hover {
+  box-shadow: 0 .12rem .12rem grey;
+  cursor: pointer;
+  transform: translateY(-.12rem);
+}
+button.return-to-entity {
+  margin: 1rem 0;
+  min-width: fit-content;
+  width: 10rem;
+  background-color: var(--secondary-color)
+}
+.edit-button {
+  background-color: var(--secondary-color);
+}
+.save-button {
+  background-color: var(--primary-color);
+}
+.cancel-button {
+  background-color: var(--cancel-color);
+}
+.delete-button {
+  background-color: var(--delete-color);
+}
+.add-button {
+  background-color: var(--quartary-color);
+}
+.upload-button {
+  background-color: blue;
+}
+img.icon {
+  height: 1rem;
+  margin: 0;
+}
+div.button-contents-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+label.button-caption, label.dummy-icon-button-caption {
+  margin-left: .5rem;
+  position: relative;
+}
+label.button-caption:hover {
+  cursor: pointer;
+}
+button.disabled {
+  background: none;
+  background-color: rgb(187, 187, 187);
+}
+label.disabled, div.disabled {
+  cursor: not-allowed!important;
+}
+button.selected-icon-button {
+  background: none;
+  background-color: var(--primary-color);
+}
+button.selected-all-icon-button {
+  background-color: var(--primary-color);
+}
+button.selected-all-icon-button:hover {
+  box-shadow: none;
+  transform: none;
+}
+button.disabled:hover {
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+button.go-checkout {
+  margin: 0 1rem 0 0;
+  height: 55%;
+  max-width: fit-content;
+  padding: .25rem .5rem;
+}
+button.proceed-checkout {
+  margin: 0;
+  padding: .25rem .5rem;
+  width: fit-content;
+}
+button.no-caption {
+  background-color: white;
+  border: none;
+  margin: -2.5rem 0 0 .25rem;
+  max-height: fit-content;
+  width: fit-content;
+}
+button.no-caption:hover {
+  box-shadow: none;
+  transform: none;
+}
+button.edit-icon {
+  margin-top: 0;
+}
+button.expand-compress {
+  margin: 0;
+}
+div.tooltip {
+  background-color: var(--primary-muted-color);
+  border-radius: 5px;
+  color: var(--secondary-color);
+  font-size: var(--font-x-small);
+  padding: .25rem .5rem;
+  position: absolute;
+  transform: translateY(-120%);
+  visibility: hidden;
+  width: fit-content;
+  z-index: 10;
+}
+div.button-contents-container:hover div.tooltip {
+  visibility: visible;
+}
+@media screen and (min-width: 900px) {
+  button.sign-in, button.sign-cancel {
+    padding: 1vh 1vw;
+  }
+}

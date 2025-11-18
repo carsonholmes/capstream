@@ -1,0 +1,2 @@
+mysqldump -u root -p -R --databases hub > steve-dbbackup71022.sql
+mysqldump -u root -p -d -t --databases hub --routines > spbackup71022.sql

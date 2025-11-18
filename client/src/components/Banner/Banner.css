@@ -1,0 +1,71 @@
+div.banner {
+    align-items: center;
+    background-color: var(--primary-muted-color);
+    display: flex;
+    height: 48px;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 150;
+}
+div.spacer {
+    height: 48px;
+}
+div.banner-image-container {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    margin-right: 5%;
+    padding: .25rem;
+    position: relative;
+    width: fit-content;
+}
+[data-notification-count]::after {
+    background-color: var(--cancel-color-hover);
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    content: attr(data-notification-count);
+    cursor: pointer;
+    display: grid;
+    font-size: var(--font-xx-small);
+    min-width: 2em;
+    padding: .25em;
+    place-items: center;
+    pointer-events: all;
+    position: absolute;
+    right: -1em;
+    top: .5em;
+    width: fit-content;
+}
+img.banner-image {
+    height: 65%;
+    position: relative;
+}
+img.banner-image:hover {
+    cursor: pointer;
+}
+
+/* div.message-envelope {
+    font-size: 1.75rem;
+    margin-right: 5%;
+} */
+
+/* div.quantity-circle {
+    align-items: center;
+    background-color: var(--cancel-color-hover);
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    font-size: var(--font-xx-small);
+    height: 1.25rem;
+    justify-content: center;
+    left: 1.5rem;
+    min-width: 1.25rem;
+    padding: .2rem;
+    position: absolute;
+    top: .75rem;
+    width: fit-content;
+} */

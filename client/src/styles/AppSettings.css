@@ -1,0 +1,66 @@
+.AppSettings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .AppSettings-content {
+    background-color: var(--background-color, #fff); /* Opaque background */
+    color: var(--text-color, #000);
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 24px;
+    width: 350px;
+    max-width: 90%;
+    z-index: 1100;
+    position: relative;
+  }
+  
+  .AppSettings-layers {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .AppSettings-layer {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .AppSettings-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .cancel-button,
+  .save-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .cancel-button {
+    background-color: var(--cancel-button-bg, #f5f5f5);
+    color: var(--cancel-button-text, #333);
+  }
+  
+  .save-button {
+    background-color: var(--save-button-bg, #007bff);
+    color: var(--save-button-text, #fff);
+  }
+  
+  .cancel-button:hover,
+  .save-button:hover {
+    opacity: 0.9;
+  }
+  

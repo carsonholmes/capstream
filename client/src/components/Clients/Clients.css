@@ -1,0 +1,152 @@
+.clients-header {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0 16px;
+  width: 80vw;
+}
+
+button.add-client {
+  min-width: 30vw !important;
+  max-width: 30vw !important;
+  margin: 2vh 0 2vh !important;
+}
+
+.clients-list {
+  display: grid;
+  gap: 16px;
+  width: 80vw;
+  margin: 0 auto;
+}
+
+/* Card base */
+.client-card {
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* Neutral look only while editing */
+.client-card.editing,
+.client-card.editing.editing { /* (defensive) */
+  background: #fff !important;
+  color: inherit !important;
+}
+
+/* Display mode */
+.client-display {
+  text-align: center;
+}
+.client-title {
+  font-size: var(--font-large);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.client-sub {
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+/* Edit form */
+.client-form .field + .field { margin-top: 14px; }
+.client-form .label {
+  text-align: center;
+  margin-bottom: 6px;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* Center the color controls in edit mode */
+.color-picker-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* horizontal centering */
+  justify-content: center;  /* vertical if it grows */
+  gap: 10px;
+}
+
+/* Size the picker and keep it responsive */
+.color-picker-wrap .react-colorful {
+  height: 180px;
+}
+
+/* Center the hex input */
+.hex-input {
+  text-align: center;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.color-picker-wrap .hint {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  min-width: 40vw;
+  max-width: 60vw;
+}
+
+div.color-field {
+  margin: 4vh 0;
+}
+
+input.client-name {
+  min-width: 40vw;
+  max-width: 60vw;
+}
+
+/* Let the card show an outline and slight lift when active, using current text color for contrast on any bg */
+.client-card {
+  position: relative; /* for the badge */
+  transition: transform .12s ease, box-shadow .12s ease, outline-color .12s ease;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  cursor: pointer;
+}
+
+.client-card.active {
+  outline-color: currentColor;
+  box-shadow:
+    0 0 0 4px rgba(0,0,0,.06),
+    0 8px 20px rgba(0,0,0,.18);
+  transform: translateY(-1px);
+}
+
+/* Optional: make the title pop a touch when active */
+.client-card.active .client-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Corner badge for extra clarity */
+.active-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  border-radius: 999px;
+  background: rgba(0,0,0,.7); /* works on light/dark cards */
+  color: #fff;
+  pointer-events: none;
+}
+
+/* Keep edit state neutral even if also "active" (e.g., if user starts editing the active one) */
+.client-card.editing,
+.client-card.editing.editing {
+  background: #fff !important;
+  color: inherit !important;
+  outline: none;
+  box-shadow: none;
+  transform: none;
+}

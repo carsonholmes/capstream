@@ -1,0 +1,95 @@
+div.view-content {
+    padding-top: .5rem;
+    width: 90%;
+    text-align: left;
+}
+button.view-action {
+    margin: 0 1rem 0 auto;
+    min-width: fit-content;
+}
+div.view-image {
+    cursor: pointer;
+    justify-self: left;
+}
+div.view-title {
+    width: 100%;
+}
+label.view-title {
+    font-size: var(--font-large);
+}
+div.view-price, div.view-condition {
+    font-size: var(--font-small);
+    text-align: left;
+}
+div.view-preferred-price {
+    font-size: var(--font-small);
+    margin-top: -.5rem;
+}
+div.view-media-strip {
+    margin: 0;
+    padding: 0;
+}
+section.view-desc {
+    font-size: var(--font-small);
+    text-align: left;
+    width: 100%;
+}
+section.line-clamp {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+button.see-more-less {
+    background-color: var(--primary-muted-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: var(--font-x-small);
+    font-weight: 600;
+    justify-self: end;
+    margin: .25rem 0 .5rem;
+    padding: 0 .25rem .25rem;
+}
+img.see-more-less {
+    height: 1.25rem;
+    position: relative;
+    top: .25rem;
+}
+section.owner {
+    margin: 1rem 0;
+}
+div.owner-info {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+div.owner-name {
+    cursor: pointer;
+    text-decoration: underline;
+}
+section.display-view-booking-container {
+    margin: 1rem 0;
+}
+div.display-view-booking-blocks {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--font-small);
+    column-gap: .5rem;
+    justify-content: flex-start;
+    line-height: 1.75;
+}
+img.display-view-help {
+    align-self: center;
+    padding: 0;
+    position: relative;
+    top: -2px;
+}
+span.display-view-booking-value {
+    color: var(--cancel-color);
+    text-align: left;
+}

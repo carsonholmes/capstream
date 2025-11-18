@@ -1,0 +1,38 @@
+select.options-container {
+    font-size: var(--font-medium);
+}
+label.label-as-placeholder {
+    cursor: text;
+    color: gray;
+    display: table;
+    font-size: var(--font-medium);
+    font-weight: 400;
+    left: 50%;
+    margin: auto;
+    padding: 0 4px;
+    position: absolute;
+    top: .4rem;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    transition:
+        font-size 200ms ease-in,
+        left 200ms ease-in,
+        top 200ms ease-in;
+    width: 100%;
+}
+label.label-on-border {
+    color: var(--primary-color);
+    font-size: 1rem;
+    top: -1.2rem;
+    visibility: visible;
+}
+.input-element:not(:placeholder-shown).input-element:not(:focus):disabled ~ .label-on-border {
+    color: gray;
+}
+option.placeholder-option {
+    color: white;
+    font-style: italic;
+}
+option.not-placeholder-option {
+    color: black;
+}

@@ -1,0 +1,32 @@
+section.card {
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-medium);
+    font-weight: 400;
+    height: fit-content;
+    margin: 0 auto 1rem;
+    padding: 1vh 0 1vh;
+    width: 90%;
+    min-width: 30vw;
+}
+h2.card-heading {
+    font-size: var(--font-large);
+    font-weight: 500;
+    overflow-wrap: break-word;
+    width: 100%;
+}
+div.card-text {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    padding: 0 .25rem;
+}
+div.post-card {
+    height: 70vh;
+}
+@media screen and (min-width: 900px) {
+    div.card {
+        border-radius: 0;
+    }
+}

@@ -1,0 +1,28 @@
+div.email-details-container {
+    width: 100%;
+}
+div.email-buttons-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: space-evenly;
+}
+div.email-label {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    color: white;
+    font-size: var(--font-xx-small);
+    margin: .5rem ;
+    padding: .5rem 1rem;
+    width: fit-content;
+}
+
+button.email-change-button {
+    background-color: var(--secondary-color);
+    border-radius: var(--button-border-radius);
+    color: white;
+    font-size: var(--font-xx-small);
+    margin: .5rem ;
+    padding: .5rem;
+}

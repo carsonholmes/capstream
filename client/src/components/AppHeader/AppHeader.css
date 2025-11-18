@@ -1,0 +1,71 @@
+header.app-header {
+  background-color: var(--header-bg-color);
+  height: 8vh; /* Reduced height */
+  min-height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vw;
+  font-size: var(--font-medium-large);
+  color: var(--header-text-color);
+}
+
+.app-title-container {
+  display: flex;
+  align-items: center; /* vertically center items */
+  margin: auto;
+  gap: 1vw; /* space between icon and title */
+  font-size: var(--font-larger);
+}
+
+header.app-logo {
+    height: 4vh;
+    min-height: 40px;
+}
+
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: var(--header-text-color);
+  color: var(--header-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+div.header-search-bar {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    margin: auto;
+    padding: .5rem 0;
+}
+div.hamburger-container {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+img.header-logo {
+    height: 4vh;
+    min-height: 40px;
+}
+img.small-header-logo {
+    cursor: pointer;
+    margin-bottom: .5rem;
+    width: min(80%, 200px);
+}
+div.header-avatar-container {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+@media screen and (min-width: 815px) {
+    div.hamburger-container {
+        grid-row: 1 / 3;
+    }
+    div.header-avatar-container {
+        grid-row: 1 / 3;
+    }
+  }

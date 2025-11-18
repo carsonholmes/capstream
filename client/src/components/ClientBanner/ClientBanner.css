@@ -1,0 +1,101 @@
+/* Sits under your header, full width */
+.client-banner {
+  width: 100%;
+  /* subtle separation from header/content */
+  box-shadow: 0 1px 0 rgba(0,0,0,.08) inset, 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* Grid keeps title perfectly centered while the button stays right-aligned */
+.client-banner__content {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr; /* spacer | title | actions */
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 16px;
+}
+
+/* Empty left column purely for centering via grid */
+.client-banner__spacer {
+  min-width: 1px;
+}
+
+.client-banner__title {
+  text-align: center;
+  font-weight: 700;
+  font-size: var(--font-medium);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Right column: park the button at the edge */
+.client-banner__actions {
+  justify-self: end;
+  width: 100%;
+}
+
+button.switch {
+    margin-top: 0 !important;
+    height: 1.8rem !important;
+    font-size: var(--font-xx-small) !important;
+}
+
+/* Small screens: tighten spacing/font a bit */
+@media (max-width: 480px) {
+  .client-banner__content {
+    gap: 8px;
+    padding: 8px 12px;
+  }
+  .client-banner__title {
+    font-size: 1rem;
+  }
+}
+
+/* --- Tabs bar (non-narrow only; hidden by media query below) --- */
+.client-banner__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  padding: 0 8px;
+  width: 100%;
+  overflow: auto; /* just in case of localization length growth */
+  border-top: 1px solid rgba(0,0,0,.08);
+  background: rgba(0,0,0,.02);
+}
+
+/* Individual tab buttons */
+.client-banner__tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 1vh 3vw;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  outline: none;
+  white-space: nowrap;
+}
+
+.client-banner__tab:hover {
+  background: rgba(0,0,0,.04);
+}
+
+.client-banner__tab:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, .35);
+  border-radius: 6px;
+}
+
+.client-banner__tab.is-active {
+  border-bottom-color: currentColor; /* shows using computed text color for contrast */
+  font-weight: 700;
+}
+
+/* Small screens: hide the tabs bar (mobile portrait) */
+@media (max-width: 480px) {
+  .client-banner__tabs {
+    display: none;
+  }
+}

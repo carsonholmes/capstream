@@ -1,0 +1,41 @@
+div.avatar-image {
+    cursor: pointer;
+}
+
+div.preview-images-container {
+    height: fit-content;
+}
+
+div.preview-image-container {
+    height: fit-content;
+}
+
+img.preview-image {
+    width: 90%;
+    height: fit-content;
+}
+
+img.empty-avatar-xxx-small {
+    height: 20px;
+    width: 20px;
+}
+img.empty-avatar-xx-small {
+    height: 40px;
+    width: 40px;
+}
+img.empty-avatar-x-small {
+    height: 64px;
+    width: 64px;
+}
+img.empty-avatar-small {
+    height: 100px;
+    width: 100px;
+}
+img.empty-avatar-medium {
+    height: 128px;
+    width: 128px;
+}
+img.empty-avatar-large {
+    height: 256px;
+    width: 256px;
+}

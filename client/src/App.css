@@ -1,0 +1,156 @@
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  word-break: break-word;
+}
+.text-align-left {
+  text-align: left;
+}
+html, body {
+  font-family: canada-type-gibson, sans-serif;
+  font-weight: 500;
+  height: 100%;
+  width: 100%;
+}
+input, textarea, button, select {
+  font-family: canada-type-gibson, sans-serif;
+  font-weight: 400;
+}
+/* Dark Mode Styles */
+.dark-mode {
+  --header-bg-color: #1a1a1a; /* Off black */
+  --header-text-color: white;
+  --input-bg-color: #1f1f1f;
+  --button-icon-color: white;
+  --icon-color: white;
+  --user-message-color: #add8e6; /* Hint of blue */
+  --app-message-color: white;
+  background-color: #070707; /* Off white that is darker than header and footer */
+  color: white;
+}
+
+main.dark-mode {
+  --header-bg-color: #1a1a1a; /* Off black */
+  --header-text-color: white;
+  --input-bg-color: #1f1f1f;
+  --button-icon-color: white;
+  --icon-color: white;
+  --user-message-color: #add8e6; /* Hint of blue */
+  --app-message-color: white;
+  background-color: #070707; /* Off white that is darker than header and footer */
+  color: white;
+}
+
+/* Light Mode Styles */
+.light-mode {
+  --header-bg-color: #f2f2f2; /* Off white */
+  --header-text-color: black;
+  --input-bg-color: white;
+  --button-icon-color: darkgrey;
+  --icon-color: rgb(58, 58, 58);
+  --user-message-color: navy;
+  --app-message-color: black;
+  background-color: white;
+  color: black;
+}
+
+/* Updated Dark Mode Styles for App-input */
+.dark-mode .App-input {
+  background-color: #1a1a1a; /* Same as header background color in dark mode */
+}
+
+#root {
+  --button-border-radius: 20px;
+  --primary-color: hsl(187, 36%, 43%);
+  --primary-offset-color: hsl(187, 36%, 60%);
+  --primary-muted-color: hsl(120, 20%, 80%);
+  --secondary-color: hsl(205, 83%, 14%);
+  --secondary-offset-color: hsl(240, 54%, 61%);
+  --highlight-selected-color: hsl(200, 100%, 50%);
+  --tertiary-color: hsl(240, 70%, 91%);
+  --tertiary-highlight-color: hsl(240, 50%, 91%);
+  --quartary-color: hsl(33, 100%, 50%);
+  --delete-color: hsl(300, 70%, 25%);
+  --cancel-color: hsl(0, 70%, 40%);
+  --cancel-color-hover: hsl(0, 70%, 50%);
+  --muted-black: hsl(0, 0%, 30%);
+  --font-xx-small: clamp(.6rem, 2.5vw, .85rem);
+  --font-x-small: clamp(.75rem, 3vw, 1rem);
+  --font-small: clamp(1rem, 3vw, 1.25rem);
+  --font-medium: clamp(1.25rem, 3vw, 1.5rem);
+  --font-medium-large: clamp(1.5rem, 3vw, 1.75rem);
+  --font-large: clamp(1.75rem, 3vw, 2rem);
+  --font-larger: clamp(1.85rem, 3.25vw, 2.5rem);
+  --font-x-large: clamp(2rem, 3.5vw, 3rem);
+  --font-xx-large: clamp(4rem, 5vw, 5rem);
+  --drop-shadow: drop-shadow(.25rem .25rem .15rem rgb(165, 165, 165));
+  --drop-shadow-small: drop-shadow(.1rem .1rem .1rem rgb(165, 165, 165));
+  height: 100%;
+  width: 100%;
+}
+::selection {
+  background-color: var(--primary-offset-color);
+  color: var(--secondary-color);
+}
+::-webkit-scrollbar {
+  height: .75rem;
+  width: .75rem;
+}
+::-webkit-scrollbar-track {
+  background: hsl(120, 20%, 80%);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border: 1px solid hsl(120, 20%, 80%);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+div.app {
+  text-align: center;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent extra white space */
+}
+
+div.input-policy {
+  color: rgb(173, 169, 169);
+  font-size: var(--font-small);
+  font-weight: 400;
+  margin: .3rem auto 0;
+  max-width: 90%;
+}
+div.input-error {
+  color: red;
+  font-size: var(--font-x-small);
+  margin: .25rem auto 0;
+  max-width: 90%;
+}
+div.error-top-margin {
+  margin-top: .5rem;
+}
+hr {
+  border: 1px solid rgb(173, 169, 169);
+  margin: 1rem auto;
+  width: 90%;
+}
+div.hazy-div {
+  background-color: black;
+  height: 100%;
+  left: 0px;
+  opacity: .2;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 50;
+}
+label.bold-text {
+  font-weight: 600;
+}

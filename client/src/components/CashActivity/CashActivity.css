@@ -1,0 +1,58 @@
+/* -------------------------------------------------------------------------- */
+/* CashActivity.css */
+
+.CashActivity { width: 100%; }
+
+/* Top bar */
+.ca-topbar {
+    display:flex; 
+    flex-direction: row; 
+    width: 100%; 
+    padding: 1vh 5vw; 
+    gap: 2vw;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* Totals */
+.ca-totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.ca-total { border: 1px solid var(--panel-border-color, hsl(0 0% 85%)); border-radius: 10px; padding: 10px 12px; background: var(--input-bg-color, #fafafa); }
+.ca-total-label { font-size: var(--font-xx-small, .75rem); opacity: .8; margin-bottom: 4px; }
+.ca-total-value { font-size: var(--font-large, 1.1rem); font-weight: 700; }
+
+/* Form grid */
+.ca-row { display: grid; grid-template-columns: 1fr; gap: 16px; width: 100%; }
+.ca-row.cols-3 { grid-template-columns: 1fr; }
+.ca-span-3 { grid-column: 1 / -1; }
+.ca-date, .ca-actions { width: 100%; }
+
+/* Attachments */
+.ca-attachments { display: grid; gap: 8px; margin-top: 8px; }
+.ca-attach-label { font-size: var(--font-xx-small, .8rem); opacity: .8; }
+.ca-drop { border: 2px dashed var(--panel-border-color, hsl(0 0% 85%)); border-radius: 10px; padding: 12px; text-align: center; color: var(--muted-black, #555); background: var(--input-bg-color, #fafafa); }
+.ca-file { display: inline-block; }
+.ca-fileline { font-size: var(--font-small, .9rem); }
+.ca-file-meta { opacity:.7; font-size: var(--font-xx-small, .75rem); }
+
+/* Actions */
+.ca-actions { display: flex; gap: 10px; justify-self: start; margin-top: 8px; }
+
+/* Table */
+.ca-table-wrap { width: 100%; overflow-x: auto; }
+.ca-table { width: 100%; border-collapse: collapse; }
+.ca-table thead th { font-size: var(--font-xx-small, .75rem); opacity: .8; text-align: left; border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 85%)); padding: 6px 8px; }
+.ca-table td { border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 88%)); padding: 8px; }
+.ca-memo { max-width: 520px; }
+.ca-empty { opacity: .8; padding: 8px; }
+.ca-row-click { cursor: pointer; }
+.ca-hint { font-size: var(--font-xx-small, .75rem); opacity: .75; margin-top: 8px; }
+
+/* Responsive */
+@media (min-width: 900px) {
+  .ca-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ca-row.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

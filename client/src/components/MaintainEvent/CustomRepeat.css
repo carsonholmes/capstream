@@ -1,0 +1,78 @@
+div.custom-repeat-container {
+    background-color: white;
+    filter: var(--drop-shadow);
+    outline: 1px solid var(--secondary-color);
+    padding: 1rem 0;
+    position: absolute;
+    top: 3rem;
+    width: min(400px, 100vw);
+    z-index: 250;
+}
+h1.custom-repeat-heading {
+    font-size: var(--font-medium);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+h2.custom-repeat-sub-heading {
+    font-size: var(--font-small);
+    font-weight: 500;
+}
+input.custom-repeat-interval {
+    color: var(--secondary-color);
+}
+div.repeat-intervals {
+    padding-bottom: 1rem;
+}
+input.repeat-intervals {
+    height: 2rem;
+    margin-left: .25rem;
+    width: 3rem;
+}
+select.custom-repeat-options {
+    color: var(--secondary-color);
+    font-size: var(--font-small);
+}
+option.custom-repeat-options {
+    color: var(--secondary-color);
+}
+div.day-checkboxes-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+div.repeat-day-checkboxes {
+    margin-bottom: 1rem;
+    padding: 0 .25rem;
+}
+input.repeat-day-checkboxes {
+    margin: 1.5rem .25rem;
+}
+div.repeat-end-options {
+    margin: 1.5rem 0 ;
+}
+div.repeat-end-block {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr;
+    grid-template-rows: repeat(4, .75fr);
+    margin-bottom: 2rem;
+    row-gap: .5rem;
+}
+h2.ends-sub-heading {
+    margin-left: 5%;
+    text-align: left;
+}
+input.custom-radio-end-options {
+    grid-column: 1;
+    margin: auto;
+}
+label.custom-radio-end-options {
+    color: var(--secondary-color);
+    grid-column: 2;
+    margin-right: auto;
+}
+input.occurences {
+    font-size: var(--font-medium);
+    width: 75%;
+}

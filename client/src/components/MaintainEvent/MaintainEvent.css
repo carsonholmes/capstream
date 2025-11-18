@@ -1,0 +1,79 @@
+div.event-container {
+    background-color: white;
+    color: var(--secondary-color);
+    filter: var(--drop-shadow);
+    font-size: var(--font-medium);
+    height: fit-content;
+    outline: 1px solid var(--secondary-color);
+    padding: 1rem;
+    position: absolute;
+    top: 35vh;
+    width: min(100%, 1000px);
+    z-index:200;
+}
+h1.maintain-event-heading {
+    font-size: var(--font-large);
+    font-weight: 500;
+}
+div.event-details-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: left;
+    width: 100%;
+}
+div.dates-and-times {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 250px);
+}
+div.maintain-event-date {
+    font-size: var(--font-small);
+    margin-top: 1rem;
+}
+select.event-time-values {
+    color: var(--secondary-color);
+    font-size: var(--font-small);
+}
+option.maintain-event-options {
+    color: var(--secondary-color) !important;
+}
+input.all-day-checkbox {
+    margin: 1.25rem .5rem 1rem 0;
+}
+div.fixed-times {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    width: 100%;
+}
+div.duration {
+    font-size: var(--font-small);
+    margin: .5rem 0;
+}
+div.customer-count {
+    font-size: var(--font-small);
+    margin-top: 1rem;
+}
+div.event-details {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-small);
+    gap: .5rem;
+    justify-content: space-evenly;
+    max-width: 375px;
+    padding: 1rem 0;
+    width: 100%;
+}
+div.repeat-options-container {
+    width: 90%;
+}
+select.event-details {
+    color: var(--secondary-color);
+    font-size: var(--font-small);
+    max-width: 25rem;
+}

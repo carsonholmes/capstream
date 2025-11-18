@@ -1,0 +1,39 @@
+div.tile-select-container {
+    border-radius: 3px;
+    margin-top: 2rem;
+    max-width: 350px;
+    outline: 1px solid grey;
+    /* padding: 0 .5rem .25rem; */
+    width: 100%;
+}
+h2.tile-select-label {
+    background-color: white;
+    color: #136b13;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: auto;
+    position: relative;
+    top: -.7rem;
+    width: fit-content;
+}
+div.tile-container {
+    display: grid;
+    gap: .25rem;
+    grid-template-columns: repeat(2, 1fr);
+    height: 150px;
+    justify-content: center;
+    overflow-y: auto;
+    /* scroll-snap-type: y mandatory; */
+    width: 100%;
+}
+button.tile-select {
+    margin: 0 auto;
+    width: 100px;
+}
+button.tile-selected {
+    background-color: #136b13 !important;
+    background-position: 0;
+    margin: 0 auto;
+    /* scroll-snap-align: center; */
+    width: 100px;
+}

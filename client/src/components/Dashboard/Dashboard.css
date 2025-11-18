@@ -1,0 +1,69 @@
+/* Dashboard wrapper */
+.Dashboard { width: 100%; }
+
+/* KPI grid */
+.Dashboard .kpi-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: .25rem 0 1rem;
+}
+
+/* Mobile: stack KPIs */
+@media (max-width: 900px) {
+  .Dashboard .kpi-grid { grid-template-columns: 1fr; }
+}
+
+/* KPI card */
+.Dashboard .kpi {
+  background: var(--input-bg-color);
+  border: 1px solid var(--panel-border-color, hsl(0 0% 88%));
+  border-radius: var(--button-border-radius);
+  box-shadow: var(--drop-shadow-small);
+  padding: 12px;
+}
+
+.Dashboard .kpi-label {
+  font-size: var(--font-x-small);
+  opacity: .8;
+  margin-bottom: .25rem;
+}
+
+.Dashboard .kpi-value {
+  font-size: var(--font-large);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.Dashboard .kpi-helper {
+  font-size: var(--font-xx-small);
+  opacity: .8;
+  margin-top: .25rem;
+}
+
+/* Divider between KPIs and panels */
+.Dashboard hr {
+  border: 0;
+  border-top: 1px solid var(--panel-border-color, hsl(0 0% 85%));
+  margin: 1rem 0;
+  opacity: .7;
+}
+
+/* Two-up panels under KPIs */
+.Dashboard .panel-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Mobile: single column */
+@media (max-width: 900px) {
+  .Dashboard .panel-row { grid-template-columns: 1fr; }
+}
+
+/* Empty-state text inside cards */
+.Dashboard .empty-panel {
+  font-size: var(--font-x-small);
+  color: var(--muted-black);
+  padding: .5rem 0;
+}

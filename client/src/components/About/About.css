@@ -1,0 +1,35 @@
+.About {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  height: 100%;
+  background-color: var(--app-bg-color); /* Match App body background color */
+}
+
+h2 {
+  margin: 1vh 0;
+}
+
+a {
+  color: var(--secondary-offset-color);
+}
+
+.About-content {
+  padding: 5vh 5vw;
+  font-size: var(--font-small);
+  display: flex;
+  flex-direction: column;
+  justify-content: left !important;
+  overflow-y: auto;
+}
+
+.dark-mode .About {
+  background-color: #070707; /* Match App body background color in dark mode */
+  color: white;
+}
+
+.light-mode .About {
+  background-color: white;
+  color: black;
+}

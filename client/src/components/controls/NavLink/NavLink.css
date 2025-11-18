@@ -1,0 +1,16 @@
+a.nav-link {
+    color: var(--secondary-color);
+    cursor: pointer;
+    /* display: inline-block; */
+    font-size: var(--font-medium);
+    font-weight: 600;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    transition: .3s ease-in-out;
+}
+a.nav-link:hover {
+    color: var(--primary-color);
+}
+a.nav-link:hover, a.nav-link:visited, a.nav-link:active {
+    text-decoration: none;
+}

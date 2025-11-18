@@ -1,0 +1,49 @@
+main.full-page-image-container {
+  background-color: black;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  text-align: unset;
+  top: 0;
+  touch-action: none;
+  width: 100%;
+  z-index: 150;
+}
+div.full-image-container {
+  background-color: black;
+  text-align: unset;
+  touch-action: none;
+}
+img.modal-image {
+    position: absolute;
+    z-index: 100;
+}
+img.full-page-image-close {
+  filter: drop-shadow(0 0 5px black);
+  right: 20px;
+  position: absolute;
+  top: 20px;
+  z-index: 150;
+}
+img.full-page-image-close:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+div.chevron-container {
+  display: flex;
+  height: 9%;
+  justify-content: space-evenly;
+  padding-bottom: .5rem;
+  position: absolute;
+  top: 91%;
+  width: 100%;
+  z-index: 110;
+}
+img.full-page-chevron {
+  height: 100%;
+}
+img.full-page-chevron:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

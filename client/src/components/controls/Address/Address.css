@@ -1,0 +1,11 @@
+div.address-container {
+    /* outline: 1px solid brown; */
+    width: 100%;
+}
+div.address-dropdown {
+    margin-top: 1.5rem;
+}
+input.address-dropdown {
+    margin: 0 auto;
+    width: 100%;
+}

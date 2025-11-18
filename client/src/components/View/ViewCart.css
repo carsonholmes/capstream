@@ -1,0 +1,63 @@
+div.cart-contents {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    min-width: 90%;
+}
+a.cart-title {
+    grid-column: 2/5;
+    width: fit-content;
+}
+span.unit-price-label, span.quantity-label {
+    color: var(--secondary-color);
+    font-size: var(--font-x-small);
+    grid-column: 1 / 2;
+}
+span.unit-price {
+    font-size: var(--font-small);
+    grid-column: 2 / 5;
+    margin-right: auto;
+    overflow: hidden;
+    white-space: nowrap;
+}
+div.quantity-block {
+    align-items: center;
+    display: flex;
+    grid-column: 2 / 3;
+}
+input.quantity-box {
+    height: 100%;
+    padding-top: .3rem;
+    width: 3rem;
+}
+button.quantity-increment {
+    border-radius: 0;
+    cursor: pointer;
+    height: 100%;
+    margin: 0 5px;
+    padding: 0;
+}
+button.quantity-increment:hover {
+    box-shadow: none;
+    cursor: pointer;
+    transform: none;
+}
+div.cart-spacer {
+    border-top: 1px solid var(--primary-color);
+    grid-column: 1 / 5;
+    height: 1rem;
+}
+button.delete-item {
+    font-size: var(--font-x-small);
+    grid-column: 3 / 5;
+    margin: auto;
+    padding: .25rem .75rem;
+    width: fit-content;
+}
+div.cart-subtotal {
+    font-size: var(--font-small);
+    margin-bottom: 1rem;
+}
+span.remove-modal-title {
+    color: var(--primary-color);
+    
+}

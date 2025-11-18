@@ -1,0 +1,84 @@
+/* keeps popup anchored */
+.cs-date-field {
+  position: relative;
+  width: 90%;
+  margin: 2rem auto .5rem;   /* center like TextBox (auto left/right) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* input shell (unchanged) */
+.cs-date-input {
+  box-sizing: border-box;
+  height: 2.75rem;
+  width: 100%;
+  padding: 0 2.25rem 0 .875rem;
+  border: 1px solid var(--panel-border-color, #cbd5e1);
+  margin: 0;
+  border-radius: 6px;
+  background: #fff;
+  display: flex; align-items: center;
+  justify-content: center;
+  cursor: text;
+  font-size: var(--font-medium, 1rem);
+  position: relative;
+}
+.cs-date-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(14,165,233,.15); border-color: var(--primary-color, #0ea5e9); }
+.cs-date-input.is-disabled { opacity: .6; cursor: not-allowed; }
+
+.cs-date-value { flex: 1 1 auto; }
+.cs-date-caret { position: absolute; right: .65rem; pointer-events: none; }
+.cs-date-clear { position: absolute; right: 1.75rem; border: 0; background: transparent; cursor: pointer; font-size: 1.1rem; line-height: 1; color: #6b7280; }
+
+/* === Floating label (matches your TextBox look, but scoped) === */
+.dp-label {
+  cursor: text;
+  color: grey;
+  display: table;
+  font-size: var(--font-medium);
+  font-weight: 400;
+  left: 50%;
+  padding: 0 4px;
+  position: absolute;
+  top: .6rem;
+  transform: translateX(-50%);
+  transition: font-size 200ms ease-in, left 200ms ease-in, top 200ms ease-in, color 200ms ease-in;
+  white-space: nowrap;
+  width: fit-content;
+  background: #fff; /* keep it readable over the border */
+}
+.dp-label.label-on-border {
+  color: var(--primary-color);
+  font-size: 1rem;
+  top: -1.2rem;
+}
+
+/* Popup alignment options */
+.cs-cal-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  padding: 10px;
+  z-index: 1000;
+  width: 280px;
+}
+.cs-cal-pop.align-center { left: 50%; transform: translateX(-50%); }
+.cs-cal-pop.align-left   { left: 0; }
+.cs-cal-pop.align-right  { right: 0; }
+
+/* header + 7-col grid (unchanged) */
+.cs-cal-header { display:grid; grid-template-columns:2rem 1fr 2rem; align-items:center; margin-bottom:8px; }
+.cs-cal-header .title { text-align:center; font-weight:600; }
+.cs-cal-header .nav { border:0; background:transparent; cursor:pointer; font-size:1.2rem; line-height:1; color:#374151; }
+
+.cs-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; user-select:none; }
+.cs-cal-grid .dow { text-align:center; font-size:.85rem; font-weight:600; padding:6px 0; color:#6b7280; }
+.cs-cal-grid .cell { height:34px; border-radius:6px; border:0; background:transparent; cursor:pointer; }
+.cs-cal-grid .cell:hover { background:#eef6ff; }
+.cs-cal-grid .cell.today { outline:1px dashed #60a5fa; }
+.cs-cal-grid .cell.selected { background:#3b82f6; color:#fff; }
+.cs-cal-grid .cell.empty { cursor:default; }

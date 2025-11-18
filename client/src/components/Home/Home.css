@@ -1,0 +1,23 @@
+div.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;         
+    justify-content: center;    
+    font-size: var(--font-medium);
+}
+
+div.home-button-container {
+    width: 50vh;;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1.home {
+    font-size: var(--font-x-large);
+}
+
+button.home {
+    font-size: var(--font-medium) !important;
+    height:fit-content !important;
+    padding: .5rem 0 !important;
+}

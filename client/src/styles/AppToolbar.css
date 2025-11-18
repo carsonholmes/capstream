@@ -1,0 +1,75 @@
+ .AppToolbar {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.AppToolbar-content {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.AppToolbar h2 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.AppToolbar-buttons {
+  margin-left: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: inherit;
+}
+
+.icon-button:hover {
+  color: #007bff;
+}
+
+.dark-mode .AppToolbar {
+  background-color: #2a1c2b;
+  color: white;
+}
+
+.light-mode .AppToolbar {
+  background-color: #e6f6f9;
+  color: black;
+}
+
+.AppToolbar-buttons {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+/* Tooltip styles (default dark mode) */
+.AppToolbar .icon-button[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* Tooltip styles for light mode */
+.AppToolbar.light-mode .icon-button[title]:hover::after {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  border: 1px solid #ccc;
+}
+

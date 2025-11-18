@@ -1,0 +1,20 @@
+div.repeat-update-options-container {
+    background-color: white;
+    color: var(--secondary-color);
+    filter: var(--drop-shadow);
+    outline: 1px solid var(--secondary-color);
+    padding: 1rem 0;
+    position: absolute;
+    width: min(300px, 75vw);
+    z-index: 250;
+}
+div.repeat-update-radio-block {
+    padding: 1rem 1rem 2rem;
+    text-align: left;
+}
+input.repeat-update-options {
+    margin: 0 .5rem;
+}
+label.repeat-update-options {
+    font-size: var(--font-small);
+}

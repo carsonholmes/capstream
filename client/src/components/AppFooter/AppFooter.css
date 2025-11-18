@@ -1,0 +1,11 @@
+div.footer-container {
+    font-size: var(--font-small);
+    padding: 1rem 0 1rem 0;
+    width: 100%;
+    height: 5vh;
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    display: flex;
+    align-items: center;         /* vertical */
+    justify-content: center;     /* horizontal; use flex-start if you want it left-aligned */
+}

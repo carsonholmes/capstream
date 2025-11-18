@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "@azure/communication-email": "^1.1.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "canvas": "^2.11.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0",
+    "gpt-3-encoder": "^1.1.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.1.7",
+    "openai": "^4.29.2",
+    "os": "^0.1.2",
+    "simple-git": "^3.27.0",
+    "xhr2": "^0.2.1"
+  },
+  "name": "ai",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "globals": "^15.8.0"
+  }
+}

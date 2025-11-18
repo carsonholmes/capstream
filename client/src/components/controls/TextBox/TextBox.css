@@ -1,0 +1,91 @@
+div.input-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: center;
+    margin: 2rem auto .5rem;
+    position: relative;
+    width: 90%;
+}
+.input-element {
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-shadow: 0 0 0px 1000px white inset;
+    font-size: 1.5rem;
+    height: 2.3rem;
+    outline: none;
+    padding-top: .25rem;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+input.input-element:disabled {
+    color: gray;
+}
+.input-element:hover {
+    border: 2px solid gray;
+}
+.input-element:focus {
+    border: 2px solid var(--primary-color);
+}
+label.input-label {
+    cursor: text;
+    color: grey;
+    display: table;
+    font-size: var(--font-medium);
+    font-weight: 400;
+    left: 50%;
+    margin: auto;
+    padding: 0 4px;
+    position: absolute;
+    top: .4rem;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    transition:
+        font-size 200ms ease-in,
+        left 200ms ease-in,
+        top 200ms ease-in;
+    white-space: nowrap;
+    width: fit-content;
+}
+.input-element:focus ~ .input-label,
+.input-element:not(:placeholder-shown).input-element:not(:focus) ~ .input-label {
+    color: var(--primary-color);
+    font-size: 1rem;
+    top: -1.2rem;
+}
+.input-element:not(:placeholder-shown).input-element:not(:focus):disabled ~ .input-label {
+    color: gray;
+}
+.display-label {
+    background-color: white;
+    color: #136b13;
+    cursor: text;
+    font-size: 1rem;
+    font-weight: 400;
+    left: 50%;
+    padding: 0 4px;
+    position: absolute;
+    top: -.8rem;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 90%;
+}
+label.display-value {
+    background-color: white;
+    cursor: text;
+    font-size: 1.5rem;
+    font-weight: 400;
+    min-height: 2.3rem;
+    overflow: hidden;
+    padding-top: .6rem;  /* iOS wants it at .2rem ? */
+    width: fit-content;
+    word-break: break-word;
+}
+label.error-label {
+    color: red !important;
+}
+input:-webkit-autofill::first-line {
+    font-family: canada-type-gibson, sans-serif;
+    font-size: 1.5rem;
+}

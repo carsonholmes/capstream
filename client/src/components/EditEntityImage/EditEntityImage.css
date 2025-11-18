@@ -1,0 +1,92 @@
+div.edit-entity-image {
+    align-items: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    padding: 1rem 0;
+    width: min(100%, 650px);
+}
+div.modal-heading {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+div.edit-avatar-images {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 36vh;
+}
+img.editable-avatar {
+    border: darkslategray solid 5px;    
+    margin-top: 2rem;
+    max-height: 35vh;
+    max-width: 30vh;
+    min-height: 25vh;
+    min-width: 25vw;
+    position: absolute;
+}
+div.circle {
+    margin:0 auto;
+    max-height: 35vh;
+    max-width: 50vw;
+    min-height: 25vh;
+    min-width: 50vw;
+    overflow:hidden;
+    position:absolute;
+    z-index: 10;
+}
+div.circle:after{
+    content:'';
+    position:absolute;
+    border-radius:100%;
+    left: 0vw;
+    width: 20vw;
+    height: 20vw;
+    box-shadow: 0px 0px 0px 2000px #E3DFD2;
+    opacity: .7;
+}
+input.hidden-file-input {
+    visibility: hidden;
+}
+div.media-strip-container {
+    display: flex;
+    overflow-x: auto;
+    width: 80%;
+}
+div.media-strip-container::-webkit-scrollbar {
+    height: .5rem;
+}
+div.media-strip {
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+}
+div.not-selectable {
+    cursor: default !important;
+}
+div.strip-thumb-nail {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+div.strip-selected {
+    border: 3px var(--highlight-selected-color) solid;
+    scroll-snap-align: center;
+}
+@media screen and (min-width: 900px) {
+    div.edit-entity-image {
+        border-radius: 0;
+    }
+  }
+button.strip-sort-arrow {
+    background-color: var(--secondary-offset-color);
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    padding: 12px 8px;
+}
+img.strip-sort-arrow {
+    height: 20px;
+}

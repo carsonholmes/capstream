@@ -1,0 +1,49 @@
+div.check-box-list-container {
+    border-radius: 3px;
+    margin-top: 2rem;
+    outline: 1px solid grey;
+    padding: 0 .5rem .5rem;
+    width: 90%;
+}
+h2.check-box-list-label {
+    background-color: white;
+    color: #136b13;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: auto;
+    position: relative;
+    top: -.7rem;
+    width: fit-content;
+}
+div.check-box-select-all {
+    margin: -.5rem 0 .5rem;
+    text-align: left;
+}
+label.select-all {
+    border-bottom: 1px solid var(--secondary-color);
+    color: var(--secondary-offset-color);
+    font-size: var(--font-x-small);
+    padding-bottom: .5rem;
+}
+div.check-boxes-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-height: 8rem;
+    overflow-y: auto;
+    width: 100%;
+}
+div.box-and-label {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin: .25rem 0;
+}
+input.check-box-list {
+    margin-right: .5rem;
+}
+label.check-box-list {
+    padding-right: .5rem;
+    white-space: nowrap;
+}

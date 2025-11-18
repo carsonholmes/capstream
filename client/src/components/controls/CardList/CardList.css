@@ -1,0 +1,22 @@
+div.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+div.card-list-item {
+    border: var(--secondary-color) solid 1px;
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin: .5rem auto;
+    padding: .5rem;
+    width: min(100%, 300px);
+}
+
+div.card-list-selected {
+    border: var(--highlight-selected-color) solid 1px;
+    outline: var(--highlight-selected-color) solid 1px;
+}

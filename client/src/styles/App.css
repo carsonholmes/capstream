@@ -1,0 +1,262 @@
+/* App.css */
+.App {
+  text-align: center;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent extra white space */
+}
+
+.App-header {
+  background-color: var(--header-bg-color);
+  height: 8vh; /* Reduced height */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  color: var(--header-text-color);
+}
+
+.App-title-container {
+  display: flex;
+  align-items: center; /* vertically center items */
+  gap: 8px; /* space between icon and title */
+}
+
+.App-title-logo {
+  height: 4vh;
+}
+
+.App-title {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 24px;
+}
+
+.App-subtitle {
+  font-size: 14px; 
+  margin-left: 5px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-balance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.balance-label {
+  font-size: 9px;
+}
+
+.balance-value {
+  font-size: 14px;
+}
+
+.App-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.App-conversation {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.App-message {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.user-message {
+  text-align: right;
+  color: var(--user-message-color);
+}
+
+.app-message {
+  text-align: left;
+  color: var(--app-message-color);
+}
+
+.success-message {
+  text-align: left;
+  color: green;
+}
+
+.process-message {
+  text-align: left;
+  color: gray;
+  font-style: italic;
+}
+
+.in-process-message {
+  text-align: left;
+  color: gray;
+  font-style: italic;
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.error-message {
+  text-align: left;
+  color: red;
+}
+
+.App-input {
+  display: flex;
+  border-top: 1px solid #ccc;
+  position: sticky;
+  bottom: 0;
+  background-color: var(--header-bg-color);
+  width: 100%; /* Ensure full width */
+}
+
+.App-input textarea {
+  flex-grow: 1;
+  margin: 10px 0px 5px 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  max-height: 100px; /* 4 lines of text */
+  overflow-y: auto;
+  height: auto; /* Ensure height is auto to avoid extra space */
+  background-color: var(--input-bg-color);
+  color: var(--header-text-color);
+}
+
+.App-input button {
+  margin: 20px 10px 10px 10px;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--header-text-color);
+}
+
+.App-input button:hover {
+  background-color: transparent;
+}
+
+/* Custom scroll bar for TextArea */
+.App-input textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.App-input textarea::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.App-input textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Custom scroll bar for conversation */
+.App-conversation::-webkit-scrollbar {
+  width: 8px;
+}
+
+.App-conversation::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.App-conversation::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.hamburger-icon, .profile-icon {
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--header-text-color);
+}
+
+.hamburger-icon:hover, .profile-icon:hover {
+  background-color: transparent;
+}
+
+.profile-circle {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: var(--header-text-color);
+  color: var(--header-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0px 2px 2px 2px;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  --header-bg-color: #1a1a1a; /* Off black */
+  --header-text-color: white;
+  --input-bg-color: #1f1f1f;
+  --button-icon-color: white;
+  --icon-color: white;
+  --user-message-color: #add8e6; /* Hint of blue */
+  --app-message-color: white;
+  background-color: #070707; /* Off white that is darker than header and footer */
+  color: white;
+}
+
+/* Light Mode Styles */
+.light-mode {
+  --header-bg-color: #f2f2f2; /* Off white */
+  --header-text-color: black;
+  --input-bg-color: white;
+  --button-icon-color: darkgrey;
+  --icon-color: rgb(58, 58, 58);
+  --user-message-color: navy;
+  --app-message-color: black;
+  background-color: white;
+  color: black;
+}
+
+/* Updated Dark Mode Styles for App-input */
+.dark-mode .App-input {
+  background-color: #1a1a1a; /* Same as header background color in dark mode */
+}
+
+/* Increase white of the up-arrow button */
+.bi-arrow-up {
+  color: var(--icon-color);
+  font-weight: bold;
+}
+
+button.app-submit {
+  background-color: rebeccapurple;
+  
+}
+
+.App-footer {
+  text-align: center;
+  font-size: 0.8em;
+  padding: 0px 5px 5px 5px;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+}

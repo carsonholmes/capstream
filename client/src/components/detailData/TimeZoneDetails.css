@@ -1,0 +1,15 @@
+div.time-zone-explanation {
+    color: var(--primary-color);
+    font-size: var(--font-small);
+    line-height: 1.25;
+    width: 75%;
+}
+div.time-zone-container {
+    width: min(350px, 95%);
+}
+label.time-zone-placeholder {
+    font-size: var(--font-small) !important;
+}
+option.time-zone-options, select.time-zone-value {
+    font-size: var(--font-small);
+}
