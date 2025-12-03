@@ -22,7 +22,7 @@ const TextArea = (props) => {
  
      if (props.displayOnly)
         return (
-            <div className='input-container text-area-container'>
+            <div style={props.style} className='input-container text-area-container'>
                 <label htmlFor={props.id} className='display-text-area-label'>{props.placeholder}</label>
                 <div style={{height: `${height}px`}} className='display-text-area-value'
                 ref={refDisplayTextArea}>{formatText(props.value)}</div>
@@ -33,7 +33,7 @@ const TextArea = (props) => {
             </div>
         )
     else return (
-        <div className='input-container text-area-container'>
+        <div style={props.style} className='input-container text-area-container'>
             <textarea id={props.id} value={props.value} placeholder=' ' onClick={props.onClick}
                 className={props.styleName ? 
                     `text-area-element input-area ${props.styleName}`

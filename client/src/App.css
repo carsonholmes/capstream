@@ -64,9 +64,14 @@ main.dark-mode {
 }
 
 #root {
+
+  --border: 1px solid lightgrey;
+  --border-radius: 5px;
   --button-border-radius: 20px;
-  --primary-color: hsl(187, 36%, 43%);
-  --primary-offset-color: hsl(187, 36%, 60%);
+  /* --primary-color: hsl(187, 36%, 43%); */
+  /* hsl(187.2 34% 44%) */
+  --primary-color: oklch(60.33% 0.069 207.01);
+  --primary-offset-color: oklch(73.269% 0.06752 206.961);
   --primary-muted-color: hsl(120, 20%, 80%);
   --secondary-color: hsl(205, 83%, 14%);
   --secondary-offset-color: hsl(240, 54%, 61%);
@@ -74,6 +79,7 @@ main.dark-mode {
   --tertiary-color: hsl(240, 70%, 91%);
   --tertiary-highlight-color: hsl(240, 50%, 91%);
   --quartary-color: hsl(33, 100%, 50%);
+  --background-color: color-mix(in oklch, white 90%, var(--primary-color) 10%);
   --delete-color: hsl(300, 70%, 25%);
   --cancel-color: hsl(0, 70%, 40%);
   --cancel-color-hover: hsl(0, 70%, 50%);
@@ -120,6 +126,22 @@ div.app {
   overflow: hidden; /* Prevent extra white space */
 }
 
+.segment-header,
+.segment-subheader {
+  font-weight: 500;
+  grid-column: 1fr;
+  overflow-wrap: break-word;
+  width: 100%;
+}
+
+h2.segment-header {
+  font-size: var(--font-large);
+}
+
+h3.segment-subheader {
+  font-size: var(--font-medium-large);
+}
+
 div.input-policy {
   color: rgb(173, 169, 169);
   font-size: var(--font-small);
@@ -153,4 +175,110 @@ div.hazy-div {
 }
 label.bold-text {
   font-weight: 600;
+}
+
+/* Inputs */
+
+div.input-container {
+    align-items: center;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    @media (min-width: 900px) {
+      grid-column: span 3;
+    }
+}
+
+.input-element {
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-shadow: 0 0 0px 1000px white inset;
+    font-size: 1.5rem;
+    height: 2.3rem;
+    outline: none;
+    /* padding-top: .25rem; */
+    text-overflow: ellipsis;
+    width: 100%;
+}
+input.input-element:disabled {
+    color: gray;
+}
+.input-element:hover {
+    border: 2px solid gray;
+}
+.input-element:focus {
+    border: 2px solid var(--primary-color);
+}
+label.input-label {
+    cursor: text;
+    color: grey;
+    display: table;
+    font-size: var(--font-medium);
+    font-weight: 400;
+    left: 50%;
+    margin: auto;
+    padding: 0 4px;
+    position: absolute;
+    top: .4rem;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    transition:
+        font-size 200ms ease-in,
+        left 200ms ease-in,
+        top 200ms ease-in;
+    white-space: nowrap;
+    width: fit-content;
+}
+.input-element:focus ~ .input-label,
+.input-element:not(:placeholder-shown).input-element:not(:focus) ~ .input-label {
+    color: var(--primary-color);
+    font-size: 1rem;
+    top: -1.2rem;
+}
+.input-element:not(:placeholder-shown).input-element:not(:focus):disabled ~ .input-label {
+    color: gray;
+}
+.display-label {
+    background-color: white;
+    color: #136b13;
+    cursor: text;
+    font-size: 1rem;
+    font-weight: 400;
+    left: 50%;
+    padding: 0 4px;
+    position: absolute;
+    top: -.8rem;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 90%;
+}
+label.display-value {
+    background-color: white;
+    cursor: text;
+    font-size: 1.5rem;
+    font-weight: 400;
+    min-height: 2.3rem;
+    overflow: hidden;
+    padding-top: .6rem;  /* iOS wants it at .2rem ? */
+    width: fit-content;
+    word-break: break-word;
+}
+label.error-label {
+    color: red !important;
+}
+input:-webkit-autofill::first-line {
+    font-family: canada-type-gibson, sans-serif;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  h2.segment-header,
+  h3.segment-subheader {
+    grid-column: span 6;
+  }
 }

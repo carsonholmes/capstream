@@ -15,9 +15,7 @@ const ContentContainer = (props) => {
         <main className={props.styleName ? `content-container ${props.styleName} ${appContext.darkMode ? 'dark-mode' : 'light-mode'}` : `content-container ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`}
             onKeyDown={keyDown} tabIndex={-1}>
             <h1 className='content-heading'>{props.contentHeading}</h1>
-            <form onSubmit={(e)=>{ e.preventDefault(); props.onSubmit?.(); }} autoComplete="off">
-                {props.children}
-            </form>
+            {props.children}
         </main>
     )
 }

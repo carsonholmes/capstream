@@ -107,9 +107,10 @@ export default function ClientBanner() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => goToTab(t.key)}
                 onKeyDown={(e) => onKeyDown(e, i)}
+                style={selected ? { backgroundColor: `color-mix(in oklch, white 30%, ${bg} 70%)` } : undefined}
                 type="button"
               >
-                {t.label}
+                <span className="tab-label">{t.label}</span>
               </button>
             )
           })}

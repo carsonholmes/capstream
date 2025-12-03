@@ -1,26 +1,33 @@
 div.text-area-container {
-    height: 10rem;
-    margin-bottom: 1rem;
-    margin-top: 2rem
+    border-radius: var(--border-radius);
+    min-height: 10vh;
+    @media (min-width: 900px) {
+    grid-column: span 6 !important;
+    }
 }
+
 textarea.input-area {
     font-size: var(--font-small);
     resize: none;
 }
+
 textarea.text-area-element {
     background: white;
     border: 1px solid gray;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     box-shadow: 0 0 0px 1000px white inset;
     color: black;
     font-size: var(--font-small);
-    height: 30vh;
+    justify-self: stretch;
+    min-height: 10vh;
+    outline: none;
     padding: .5rem;
     position: relative;
-    outline: none;
+    resize: vertical;
     text-align: left;
     width: 100%;
 }
+
 .text-area-element:focus ~ .input-label,
 .text-area-element:not(:placeholder-shown).text-area-element:not(:focus) ~ .input-label {
     color: var(--primary-color);
@@ -54,3 +61,4 @@ textarea.display-text-area-value, div.display-text-area-value {
     text-align: left;
     width: 100%;
 }
+

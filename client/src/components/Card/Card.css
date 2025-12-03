@@ -7,10 +7,11 @@ section.card {
     font-size: var(--font-medium);
     font-weight: 400;
     height: fit-content;
-    margin: 0 auto 1rem;
-    padding: 1vh 0 1vh;
-    width: 90%;
+    /* margin: 0 auto 1rem; */
+    /* padding: 1vh 0 1vh; */
     min-width: 30vw;
+    row-gap: 2rem;
+    width: 90%;
 }
 h2.card-heading {
     font-size: var(--font-large);

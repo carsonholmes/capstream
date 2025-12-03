@@ -1,12 +1,10 @@
-div.input-container {
+/* div.input-container {
     align-items: center;
     display: flex;
     flex-direction: column;
     height: fit-content;
     justify-content: center;
-    margin: 2rem auto .5rem;
     position: relative;
-    width: 90%;
 }
 .input-element {
     border: 1px solid gray;
@@ -15,7 +13,6 @@ div.input-container {
     font-size: 1.5rem;
     height: 2.3rem;
     outline: none;
-    padding-top: .25rem;
     text-overflow: ellipsis;
     width: 100%;
 }
@@ -78,7 +75,7 @@ label.display-value {
     font-weight: 400;
     min-height: 2.3rem;
     overflow: hidden;
-    padding-top: .6rem;  /* iOS wants it at .2rem ? */
+    padding-top: .6rem;
     width: fit-content;
     word-break: break-word;
 }
@@ -88,4 +85,4 @@ label.error-label {
 input:-webkit-autofill::first-line {
     font-family: canada-type-gibson, sans-serif;
     font-size: 1.5rem;
-}
+} */

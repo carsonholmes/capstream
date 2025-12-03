@@ -58,7 +58,7 @@ button.switch {
   display: flex;
   justify-content: center;
   gap: 2vw;
-  padding: 0 8px;
+  /* padding: 0 8px; */
   width: 100%;
   overflow: auto; /* just in case of localization length growth */
   border-top: 1px solid rgba(0,0,0,.08);
@@ -68,19 +68,24 @@ button.switch {
 /* Individual tab buttons */
 .client-banner__tab {
   appearance: none;
-  border: none;
   background: transparent;
-  padding: 1vh 3vw;
-  font: inherit;
+  border: none;
+  border-bottom: 2px solid transparent;
   color: inherit;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
+  font: inherit;
   outline: none;
+  padding: 1vh 3vw;
   white-space: nowrap;
 }
 
-.client-banner__tab:hover {
-  background: rgba(0,0,0,.04);
+.client-banner__tab .tab-label {
+  display: inline-block;
+  transition: transform .25s ease-in-out;
+}
+
+.client-banner__tab:hover .tab-label {
+  transform: scale(1.25);
 }
 
 .client-banner__tab:focus-visible {
@@ -89,8 +94,9 @@ button.switch {
 }
 
 .client-banner__tab.is-active {
-  border-bottom-color: currentColor; /* shows using computed text color for contrast */
-  font-weight: 700;
+  /* background-color: var(--primary-color); */
+  /* border-bottom-color: currentColor; shows using computed text color for contrast */
+  /* font-weight: 600; */
 }
 
 /* Small screens: hide the tabs bar (mobile portrait) */

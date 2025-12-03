@@ -1,11 +1,17 @@
 /* keeps popup anchored */
 .cs-date-field {
-  position: relative;
-  width: 90%;
-  margin: 2rem auto .5rem;   /* center like TextBox (auto left/right) */
+  align-items: center;
+  border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* margin: 2rem auto .5rem;   center like TextBox (auto left/right) */
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  width: 100%;
+  @media (min-width: 900px) {
+    grid-column: span 3;
+  }
 }
 
 /* input shell (unchanged) */
