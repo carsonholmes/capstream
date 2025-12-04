@@ -79,6 +79,10 @@ button.switch {
   white-space: nowrap;
 }
 
+.client-banner__tab:hover {
+  background-color: color-mix(in oklch, white 10%, var(--client-bg) 75%);
+}
+
 .client-banner__tab .tab-label {
   display: inline-block;
   transition: transform .25s ease-in-out;

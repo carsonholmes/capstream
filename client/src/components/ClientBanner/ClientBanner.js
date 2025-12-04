@@ -71,7 +71,7 @@ export default function ClientBanner() {
   return (
     <div
       className="client-banner"
-      style={{ backgroundColor: bg, color: textColor }}
+      style={{ backgroundColor: bg, color: textColor, '--client-bg': bg }}
       role="region"
       aria-label="Active client banner"
     >
