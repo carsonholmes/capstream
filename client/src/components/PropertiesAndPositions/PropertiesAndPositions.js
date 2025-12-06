@@ -169,12 +169,12 @@ const PropertiesAndPositions = () => {
       </div>
       <div className='pap-attachments' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
         <div className='pap-drop'>Drop OM PDF here (optional)</div>
-        <input className='pap-file' type='file' onChange={onFilePick} />
+        <input type='file' onChange={onFilePick} />
         {row.attachments?.length > 0 && (
           <ul className='pap-files'>
             {row.attachments.map((f) => (
               <li key={f.idAttachment || f.id}>
-                {f.fileName || f.name} <span className='pap-file-meta'>({f.sizeBytes ?? f.size ?? 0} bytes)</span>
+                {f.fileName || f.name} <span>({f.sizeBytes ?? f.size ?? 0} bytes)</span>
                 <Button kind='text' styleName='primary home sign-cancel' onClick={() => deleteAttachment(f.idAttachment || f.id)}>Delete</Button>
               </li>
             ))}

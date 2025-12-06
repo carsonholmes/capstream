@@ -155,70 +155,57 @@ const Updates = () => {
     setSelectedPropertyId(u.propertyId)
   }
 
+  const bg = appContext?.activeBackground || '#f5f5f5'
+
   return (
     <ContentContainer>
-      <div className={`Updates ${appContext?.darkMode ? 'dark-mode' : 'light-mode'}`}>
-        {/* Select Property */}
-        <Card cardHeading=''>
-          <div className='upd-select-bar'>
-            <Select
-              id='propertySelect'
-              dataCol='propertyId'
-              label='Select a Property to Maintain Updates...'
-              type='text'
-              value={selectedPropertyId || ''}
-              data={[{ value: '', caption: 'Select a property' }, ...properties.map(p => ({ value: String(p.id), caption: p.name }))]}
-              onChange={onPickProperty}
-            />
-            <Button styleName='primary submit upd-select-bar' onClick={clearForm}>New Update</Button>
-          </div>
-        </Card>
+      <div className='updates-select' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <Select
+          id='propertySelect'
+          dataCol='propertyId'
+          label='Select a Property'
+          type='text'
+          value={selectedPropertyId || ''}
+          data={[{ value: '', caption: 'Select a property' }, ...properties.map(p => ({ value: String(p.id), caption: p.name }))]}
+          onChange={onPickProperty}
+        />
+        <Button styleName='primary sign-in home' onClick={clearForm}>New Update</Button>
+      </div>
 
-        {/* Update form */}
-        <Card cardHeading={row.id ? 'Edit Update' : 'Create Update'}>
-          <div className='upd-row cols-3'>
-            <div className='upd-date'>
-              <DatePicker id='updateDate' dataCol='updateDate' placeholder='Update date' value={row.updateDate || null} onChange={update} />
-            </div>
-            <div className='upd-date'>
-              <DatePicker id='revisedSaleDate' dataCol='revisedSaleDate' placeholder='Revised sale date' value={row.revisedSaleDate || null} onChange={update} />
-            </div>
-            <TextBox id='revisedIrrPct' dataCol='revisedIrrPct' value={row.revisedIrrPct} placeholder='Revised IRR (est, %)' onChange={update} onSubmit={onSave} type='number' />
-            <TextBox id='revisedEquityMultiple' dataCol='revisedEquityMultiple' value={row.revisedEquityMultiple} placeholder='Revised Equity Multiple (est)' onChange={update} onSubmit={onSave} type='number' />
+      <div className='updates-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <h2 className='segment-header'>{row.idEntity ? 'Edit Update' : 'Create Update'}</h2>
+        <DatePicker id='updateDate' dataCol='updateDate' placeholder='Update date' value={row.updateDate || null} onChange={update} />
+        <DatePicker id='revisedSaleDate' dataCol='revisedSaleDate' placeholder='Revised sale date' value={row.revisedSaleDate || null} onChange={update} />
+        <TextBox id='revisedIrrPct' dataCol='revisedIrrPct' value={row.revisedIrrPct} placeholder='Revised IRR (est, %)' onChange={update} onSubmit={onSave} type='number' />
+        <TextBox id='revisedEquityMultiple' dataCol='revisedEquityMultiple' value={row.revisedEquityMultiple} placeholder='Revised Equity Multiple (est)' onChange={update} onSubmit={onSave} type='number' />
+        <Select id='distributionGuidance' dataCol='distributionGuidance' type='text' value={row.distributionGuidance || 'Same as OM'} label='Distribution guidance' onChange={update}
+          data={[
+            { value: 'Same as OM', caption: 'Same as OM' },
+            { value: 'Increase', caption: 'Increase' },
+            { value: 'Decrease', caption: 'Decrease' },
+            { value: 'Suspend', caption: 'Suspend' }
+          ]}
+        />
+        <TextArea id='notes' dataCol='notes' value={row.notes} placeholder='Notes (capex/occupancy, etc.)' onChange={update} />
+      </div>
 
-            <Select id='distributionGuidance' dataCol='distributionGuidance' type='text' value={row.distributionGuidance || 'Same as OM'} label='Distribution guidance' onChange={update}
-              data={[
-                { value: 'Same as OM', caption: 'Same as OM' },
-                { value: 'Increase', caption: 'Increase' },
-                { value: 'Decrease', caption: 'Decrease' },
-                { value: 'Suspend', caption: 'Suspend' }
-              ]}
-            />
-            <div className='upd-span-2'>
-              <TextArea id='notes' dataCol='notes' value={row.notes} placeholder='Notes (capex/occupancy, etc.)' onChange={update} />
-            </div>
-          </div>
+      <div className='updates-attachments' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <div className='updates-drop'>Drop pdf/image/email</div>
+        <input type='file' onChange={onFilePick} />
+        {row.attachment && (
+          <div className='updates-fileline'>Attached: {row.attachment.name} <span className='updates-file-meta'>({row.attachment.size} bytes)</span></div>
+        )}
+      </div>
 
-          {/* Attachment */}
-          <div className='upd-attachments'>
-            <label className='upd-attach-label'>Attachment</label>
-            <div className='upd-drop'>Drop pdf/image/email</div>
-            <input className='upd-file' type='file' onChange={onFilePick} />
-            {row.attachment && (
-              <div className='upd-fileline'>Attached: {row.attachment.name} <span className='upd-file-meta'>({row.attachment.size} bytes)</span></div>
-            )}
-          </div>
-
-          {/* Actions */}
-          <div className='upd-actions'>
-            <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>
-              {isSaving ? 'Saving…' : 'Save Update'}
-            </Button>
-          </div>
-        </Card>
+      <div className='upd-actions'>
+        <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>
+          {isSaving ? 'Saving…' : 'Save Update'}
+        </Button>
+      </div>
 
         {/* Timeline */}
-        <Card cardHeading='Previous updates (timeline)'>
+        <div className='updates-timeline' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+          <h2 className='segment-header'>Previous updates (timeline)</h2>
           {selectedPropertyId ? (
             <div className='upd-table-wrap'>
               <table className='upd-table'>
@@ -253,8 +240,7 @@ const Updates = () => {
           ) : (
             <div className='upd-empty'>Select a property to view its update history.</div>
           )}
-        </Card>
-      </div>
+        </div>
     </ContentContainer>
   )
 }
