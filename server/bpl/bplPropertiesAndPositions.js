@@ -22,6 +22,7 @@ const RELATE_OWNED = 2
 
 const bplPropertiesAndPositions = {
 
+
   // ---------------------------------------------------------------------------
   // LOAD (by idEntity) -> returns ONE merged row (entity fields copied in)
   // ---------------------------------------------------------------------------
@@ -91,7 +92,9 @@ const bplPropertiesAndPositions = {
             const idEntity = resultEntity[0][0].idEntity;
 
             // pass through all property-position fields and attach idEntity
-            const propData = { ...data, idEntity };
+            let propData = { ...data, idEntity };
+            // normalize date fields to avoid formatting issues
+            propData = dalDB.normalizeDates(propData, ['acquisitionDate','investmentDate','projectedSaleDate'])
 
             dalPropertyPosition.insertPropertyPosition(propData, (errProp, resultProp) => {
               if (!errProp && resultProp && resultProp[0] && resultProp[0][0]) {
@@ -133,7 +136,9 @@ const bplPropertiesAndPositions = {
     //   propertyName, propertyNotes, // used to refresh Entity title/desc
     //   ... other property-position fields required by DAL update
     // }
-    dalPropertyPosition.updatePropertyPosition(data, (errProp) => {
+    // normalize date fields before updating
+    const upd = dalDB.normalizeDates(data, ['acquisitionDate','investmentDate','projectedSaleDate'])
+    dalPropertyPosition.updatePropertyPosition(upd, (errProp) => {
       if (!errProp) {
         const entityPatch = {
           idEntity:     data.idEntity,

@@ -10,74 +10,43 @@ import TextArea from '../controls/TextArea/TextArea'
 import DatePicker from '../controls/DatePicker/DatePicker'
 import './Updates.css'
 
-// ---- Minimal CDO stub (replace with real implementation later) -----------------
-class UpdatesCDO {
-  constructor() {
-    this._properties = [
-      { id: '1', name: 'Example Apartments' },
-      { id: '2', name: 'Ridge Office' }
-    ]
-    // seed a couple of previous updates for Example Apartments
-    this._updatesByProperty = {
-      '1': [
-        { id: 'u-2025-06-30', propertyId: '1', propertyName: 'Example Apartments', updateDate: '2025-06-30', revisedSaleDate: '2027-09-01', revisedIrrPct: 14.5, revisedEquityMultiple: 1.85, distributionGuidance: 'Decrease', notes: 'Roof replacement', attachment: null },
-        { id: 'u-2025-03-31', propertyId: '1', propertyName: 'Example Apartments', updateDate: '2025-03-31', revisedSaleDate: '2027-06-01', revisedIrrPct: 15.0, revisedEquityMultiple: 1.9, distributionGuidance: 'Same as OM', notes: 'Baseline', attachment: null }
-      ],
-      '2': []
-    }
-  }
+// Real CDOs
+import cdoUpdates, { getEmptyRow as getEmptyUpdateRow } from '../../cdo/cdoUpdates'
+import cdoPositions from '../../cdo/cdoPositions'
+import cdoAttachments from '../../cdo/cdoAttachments'
 
-  get getEmptyRow() {
-    return {
-      id: null,
-      propertyId: '',
-      propertyName: '',
-      updateDate: '',
-      // revisions (optional)
-      revisedSaleDate: '',
-      revisedIrrPct: '',
-      revisedEquityMultiple: '',
-      distributionGuidance: 'Same as OM',
-      notes: '',
-      attachment: null
-    }
-  }
+// map server row -> UI model
+const mapServerToUI = (r = {}) => ({
+  id: r.idEntity || r.id || null,
+  propertyId: r.idProperty || r.propertyId || '',
+  propertyName: r.propertyName || '',
+  updateDate: r.updateDate || null,
+  revisedSaleDate: r.revisedSaleDate || null,
+  revisedIrrPct: r.revisedIrrPct ?? '',
+  revisedEquityMultiple: r.revisedEquityMultiple ?? '',
+  distributionGuidance: r.distributionGuidance || 'Same as OM',
+  notes: r.notes || '',
+  attachment: r.attachment || null,
+})
 
-  async listProperties(search = '') {
-    return this._properties.filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()))
+// map UI model -> server payload
+const mapUIToServer = (u = {}) => {
+  const payload = {
+    idProperty: u.propertyId || undefined,
+    propertyName: u.propertyName || undefined,
+    updateDate: u.updateDate || undefined,
+    revisedSaleDate: u.revisedSaleDate || undefined,
+    revisedIrrPct: u.revisedIrrPct ?? undefined,
+    revisedEquityMultiple: u.revisedEquityMultiple ?? undefined,
+    distributionGuidance: u.distributionGuidance || undefined,
+    notes: u.notes || undefined
   }
-
-  async listUpdates(propertyId) {
-    const list = this._updatesByProperty[propertyId] || []
-    // sort desc by date
-    return [...list].sort((a, b) => String(b.updateDate).localeCompare(String(a.updateDate)))
-  }
-
-  async getUpdateById(id) {
-    for (const pid of Object.keys(this._updatesByProperty)) {
-      const found = (this._updatesByProperty[pid] || []).find(u => u.id === id)
-      if (found) return found
-    }
-    return null
-  }
-
-  async saveUpdate(row) {
-    const id = row.id ?? `u-${Date.now()}`
-    const propertyId = row.propertyId
-    if (!this._updatesByProperty[propertyId]) this._updatesByProperty[propertyId] = []
-    const existingIdx = this._updatesByProperty[propertyId].findIndex(u => u.id === id)
-    const saved = { ...row, id }
-    if (existingIdx >= 0) this._updatesByProperty[propertyId][existingIdx] = saved
-    else this._updatesByProperty[propertyId].push(saved)
-    return saved
-  }
-
-  async uploadAttachment(file) {
-    return { name: file?.name ?? 'unnamed', size: file?.size ?? 0, id: String(Math.random()) }
-  }
+  // Only include idEntity if updating an existing record
+  if (u.id) payload.idEntity = u.id
+  return payload
 }
-const cdo = new UpdatesCDO()
-// -------------------------------------------------------------------------------
+
+const emptyUIRow = () => mapServerToUI(getEmptyUpdateRow())
 
 const Updates = () => {
   const { appContext } = React.useContext(AppContext)
@@ -88,7 +57,7 @@ const Updates = () => {
   const [timeline, setTimeline] = useState([])
 
   // ---- form state --------------------------------------------------------------
-  const [row, setRow] = useState(cdo.getEmptyRow)
+  const [row, setRow] = useState(emptyUIRow())
   const [isSaving, setIsSaving] = useState(false)
 
   const canSubmit = useMemo(() => {
@@ -97,11 +66,14 @@ const Updates = () => {
     return !isSaving && hasRequired
   }, [row, isSaving])
 
-  // initial load
+  // initial load - properties for selector
   useEffect(() => {
     let isMounted = true
-    cdo.listProperties('')
-      .then(list => { if (isMounted) setProperties(list) })
+    cdoPositions.listByClient({ activeClient: appContext?.activeClient }, (err, list) => {
+      if (!isMounted) return
+      const arr = Array.isArray(list) ? list.map(p => ({ id: p.idEntity || p.id, name: p.propertyName || p.name || '', propertyName: p.propertyName || p.name || '' })) : []
+      setProperties(arr)
+    })
     return () => { isMounted = false }
   }, [])
 
@@ -109,7 +81,12 @@ const Updates = () => {
   useEffect(() => {
     let isMounted = true
     if (!selectedPropertyId) { setTimeline([]); return }
-    cdo.listUpdates(selectedPropertyId).then(list => { if (isMounted) setTimeline(list) })
+    cdoUpdates.listByProperty({ idProperty: selectedPropertyId }, (err, list) => {
+      if (!isMounted) return
+      const arr = Array.isArray(list) ? list : []
+      const mapped = arr.map(mapServerToUI).sort((a,b) => String(b.updateDate || '').localeCompare(String(a.updateDate || '')))
+      setTimeline(mapped)
+    })
     return () => { isMounted = false }
   }, [selectedPropertyId])
 
@@ -122,21 +99,53 @@ const Updates = () => {
     setRow(prev => ({
       ...prev,
       propertyId: id,
-      propertyName: prop?.name ?? ''
+      propertyName: prop?.propertyName || prop?.name || ''
     }))
   }
 
-  const clearForm = () => setRow({ ...cdo.getEmptyRow, propertyId: selectedPropertyId, propertyName: properties.find(p => p.id === selectedPropertyId)?.name || '' })
+  const clearForm = () => {
+    if (!selectedPropertyId) {
+      alert('Please select a property before adding a new update.')
+      return
+    }
+    setRow({ ...emptyUIRow(), propertyId: selectedPropertyId, propertyName: properties.find(p => String(p.id) === String(selectedPropertyId))?.propertyName || properties.find(p => String(p.id) === String(selectedPropertyId))?.name || '' })
+  }
 
   const onSave = async () => {
     if (!canSubmit) return
+    setIsSaving(true)
     try {
-      setIsSaving(true)
-      const saved = await cdo.saveUpdate(row)
-      setRow(saved)
-      // refresh timeline
-      const list = await cdo.listUpdates(saved.propertyId)
-      setTimeline(list)
+      const payload = mapUIToServer(row)
+      const res = await new Promise((resolve, reject) => {
+        const cb = (err, res) => {
+          if (err) reject(err)
+          else if (res?.error) reject(new Error(typeof res.error === 'object' ? JSON.stringify(res.error, null, 2) : res.error))
+          else resolve(res)
+        }
+        if (!row.id) cdoUpdates.add(payload, cb)
+        else cdoUpdates.update(payload, cb)
+      })
+
+      // refresh timeline after save (use payload or selectedPropertyId as fallback)
+      const propId = payload?.idProperty || row.propertyId || selectedPropertyId
+      await new Promise((resolve) => {
+        if (!propId) { resolve(); return }
+        cdoUpdates.listByProperty({ idProperty: propId }, (err, list) => {
+          const arr = Array.isArray(list) ? list : []
+          setTimeline(arr.map(mapServerToUI))
+          // ensure selection remains set so timeline is visible
+          if (!selectedPropertyId && propId) setSelectedPropertyId(propId)
+          resolve()
+        })
+      })
+      // clear form to new empty row for new entry (preserve property selection)
+      setRow({ ...emptyUIRow(), propertyId: selectedPropertyId, propertyName: properties.find(p => String(p.id) === String(selectedPropertyId))?.propertyName || '' })
+      // Show success message
+      alert(row.id ? 'Update updated successfully!' : 'Update created successfully!')
+    } catch (e) {
+      const errMsg = e?.message || (typeof e === 'object' ? JSON.stringify(e, null, 2) : String(e))
+      console.error('Save failed:', errMsg)
+      alert(`Save failed. Check browser console (F12) for details.`)
     } finally {
       setIsSaving(false)
     }
@@ -145,17 +154,33 @@ const Updates = () => {
   const onFilePick = async (evt) => {
     const file = evt?.target?.files?.[0]
     if (!file) return
-    const meta = await cdo.uploadAttachment(file)
-    setRow(prev => ({ ...prev, attachment: meta }))
+    // attach to the existing entity if it has an id, otherwise upload but it won't be associated until saved
+    const idEntity = row.id || null
+    cdoAttachments.uploadAttachment({ idEntity, file }, (err, meta) => {
+      if (err) return console.error('upload failed', err)
+      setRow(prev => ({ ...prev, attachment: meta }))
+    })
     evt.target.value = ''
   }
 
   const onEditFromTimeline = async (u) => {
-    setRow({ ...cdo.getEmptyRow, ...u })
+    setRow(prev => ({ ...emptyUIRow(), ...mapServerToUI(u) }))
     setSelectedPropertyId(u.propertyId)
   }
 
   const bg = appContext?.activeBackground || '#f5f5f5'
+
+  // format ISO/Date-ish strings to local date (short)
+  const fmtDate = (d) => {
+    if (!d) return ''
+    try {
+      const dt = (d instanceof Date) ? d : new Date(d)
+      if (isNaN(dt)) return String(d)
+      return dt.toLocaleDateString()
+    } catch (e) {
+      return String(d)
+    }
+  }
 
   return (
     <ContentContainer>
@@ -166,19 +191,19 @@ const Updates = () => {
           label='Select a Property'
           type='text'
           value={selectedPropertyId || ''}
-          data={[{ value: '', caption: 'Select a property' }, ...properties.map(p => ({ value: String(p.id), caption: p.name }))]}
+          data={[{ value: '', caption: 'Select a property' }, ...properties.map(p => ({ value: String(p.id), caption: p.propertyName || p.name || '' }))]}
           onChange={onPickProperty}
         />
-        <Button styleName='primary sign-in home' onClick={clearForm}>New Update</Button>
+        <Button styleName='primary sign-in home' onClick={clearForm} disabled={!selectedPropertyId}>New Update</Button>
       </div>
 
       <div className='updates-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
-        <h2 className='segment-header'>{row.idEntity ? 'Edit Update' : 'Create Update'}</h2>
-        <DatePicker id='updateDate' dataCol='updateDate' placeholder='Update date' value={row.updateDate || null} onChange={update} />
-        <DatePicker id='revisedSaleDate' dataCol='revisedSaleDate' placeholder='Revised sale date' value={row.revisedSaleDate || null} onChange={update} />
-        <TextBox id='revisedIrrPct' dataCol='revisedIrrPct' value={row.revisedIrrPct} placeholder='Revised IRR (est, %)' onChange={update} onSubmit={onSave} type='number' />
-        <TextBox id='revisedEquityMultiple' dataCol='revisedEquityMultiple' value={row.revisedEquityMultiple} placeholder='Revised Equity Multiple (est)' onChange={update} onSubmit={onSave} type='number' />
-        <Select id='distributionGuidance' dataCol='distributionGuidance' type='text' value={row.distributionGuidance || 'Same as OM'} label='Distribution guidance' onChange={update}
+        <h2 className='segment-header'>{row.id ? 'Edit Update' : 'Create Update'}</h2>
+        <DatePicker id='updateDate' dataCol='updateDate' placeholder='Update date' value={row.updateDate || null} onChange={update} disabled={!selectedPropertyId} />
+        <DatePicker id='revisedSaleDate' dataCol='revisedSaleDate' placeholder='Revised sale date' value={row.revisedSaleDate || null} onChange={update} disabled={!selectedPropertyId} />
+        <TextBox id='revisedIrrPct' dataCol='revisedIrrPct' value={row.revisedIrrPct} placeholder='Revised IRR (est, %)' onChange={update} onSubmit={onSave} type='number' disabled={!selectedPropertyId} />
+        <TextBox id='revisedEquityMultiple' dataCol='revisedEquityMultiple' value={row.revisedEquityMultiple} placeholder='Revised Equity Multiple (est)' onChange={update} onSubmit={onSave} type='number' disabled={!selectedPropertyId} />
+        <Select id='distributionGuidance' dataCol='distributionGuidance' type='text' value={row.distributionGuidance || 'Same as OM'} label='Distribution guidance' onChange={update} disabled={!selectedPropertyId}
           data={[
             { value: 'Same as OM', caption: 'Same as OM' },
             { value: 'Increase', caption: 'Increase' },
@@ -186,12 +211,12 @@ const Updates = () => {
             { value: 'Suspend', caption: 'Suspend' }
           ]}
         />
-        <TextArea id='notes' dataCol='notes' value={row.notes} placeholder='Notes (capex/occupancy, etc.)' onChange={update} />
+        <TextArea id='notes' dataCol='notes' value={row.notes} placeholder='Notes (capex/occupancy, etc.)' onChange={update} disabled={!selectedPropertyId} />
       </div>
 
       <div className='updates-attachments' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
         <div className='updates-drop'>Drop pdf/image/email</div>
-        <input type='file' onChange={onFilePick} />
+        <input type='file' onChange={onFilePick} disabled={!selectedPropertyId || !row.id} />
         {row.attachment && (
           <div className='updates-fileline'>Attached: {row.attachment.name} <span className='updates-file-meta'>({row.attachment.size} bytes)</span></div>
         )}
@@ -205,7 +230,10 @@ const Updates = () => {
 
         {/* Timeline */}
         <div className='updates-timeline' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
-          <h2 className='segment-header'>Previous updates (timeline)</h2>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <h2 className='segment-header'>Previous updates (timeline)</h2>
+            <Button styleName='primary' onClick={() => clearForm()} disabled={!selectedPropertyId}>Add New</Button>
+          </div>
           {selectedPropertyId ? (
             <div className='upd-table-wrap'>
               <table className='upd-table'>
@@ -225,8 +253,8 @@ const Updates = () => {
                   )}
                   {timeline.map(u => (
                     <tr key={u.id} onClick={() => onEditFromTimeline(u)} className='upd-row-click'>
-                      <td>{u.updateDate || ''}</td>
-                      <td>{u.revisedSaleDate || ''}</td>
+                      <td>{fmtDate(u.updateDate)}</td>
+                      <td>{fmtDate(u.revisedSaleDate)}</td>
                       <td>{u.revisedIrrPct !== undefined && u.revisedIrrPct !== '' ? `${u.revisedIrrPct}%` : ''}</td>
                       <td>{u.revisedEquityMultiple}</td>
                       <td>{u.distributionGuidance}</td>

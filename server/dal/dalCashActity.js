@@ -14,15 +14,19 @@ const dalCashActivity = {
   //   insertCashActivity(
   //     p_idEntity CHAR(36),
   //     p_idProperty CHAR(36),
+  //     p_propertyName VARCHAR(255),
   //     p_activityDate DATE,
   //     p_activityType VARCHAR(32),  -- e.g., Contribution/Distribution/Expense/Income
   //     p_amount DECIMAL(18,2),
+  //     p_method VARCHAR(64),
+  //     p_periodStart DATE,
+  //     p_periodEnd DATE,
   //     p_notes TEXT
   //   )
   insertCashActivity: (data, callback) => {
     const params =
-      `("${data.idEntity}","${data.idProperty}","${data.activityDate}",` +
-      `"${data.activityType}","${data.amount}","${data.notes}")`;
+      `("${data.idEntity}","${data.idProperty}","${data.propertyName}","${data.activityDate}",` +
+      `"${data.activityType}","${data.amount}","${data.method || ''}","${data.periodStart || ''}","${data.periodEnd || ''}","${data.notes || ''}")`;
 
     try {
       db.dbo.query('CALL insertCashActivity' + params, (err, result) => {
@@ -113,15 +117,19 @@ const dalCashActivity = {
   //   updateCashActivity(
   //     p_idEntity CHAR(36),
   //     p_idProperty CHAR(36),
+  //     p_propertyName VARCHAR(255),
   //     p_activityDate DATE,
   //     p_activityType VARCHAR(32),
   //     p_amount DECIMAL(18,2),
+  //     p_method VARCHAR(64),
+  //     p_periodStart DATE,
+  //     p_periodEnd DATE,
   //     p_notes TEXT
   //   )
   updateCashActivity: (data, callback) => {
     const params =
-      `("${data.idEntity}","${data.idProperty}","${data.activityDate}",` +
-      `"${data.activityType}","${data.amount}","${data.notes}")`;
+      `("${data.idEntity}","${data.idProperty}","${data.propertyName}","${data.activityDate}",` +
+      `"${data.activityType}","${data.amount}","${data.method || ''}","${data.periodStart || ''}","${data.periodEnd || ''}","${data.notes || ''}")`;
 
     try {
       db.dbo.query('CALL updateCashActivity' + params, (err, result) => {

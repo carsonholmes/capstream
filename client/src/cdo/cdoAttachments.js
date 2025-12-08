@@ -2,7 +2,11 @@
 import util from '../shared/util.js'
 import config from '../config.js'
 import { AppContext } from '../AppContext.js'
-const servicesURL = `${config.server.url}:${config.server.webServicesPort}/attachments/`
+var servicesURL = `${config.server.url}:${config.server.webServicesPort}/`
+if (config.server.url === "https://data.capstream.io") {
+  servicesURL = "https://data.capstream.io/"
+    }
+servicesURL += "attachments/"
 
 const cdoAttachments = {
   

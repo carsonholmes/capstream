@@ -2,7 +2,11 @@
 import util from '../shared/util.js';
 import config from '../config.js';
 
-const servicesURL = `${config.server.url}:${config.server.webServicesPort}/group/`;
+var servicesURL = `${config.server.url}:${config.server.webServicesPort}/`
+if (config.server.url === "https://data.capstream.io") {
+  servicesURL = "https://data.capstream.io/"
+    }
+servicesURL += "group/"
 
 // Hard-coded semantics for Group
 const ENTITY_TYPE_GROUP = 3; //entity type 3 = Group

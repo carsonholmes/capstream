@@ -205,7 +205,7 @@ export default function Clients() {
                     </div>
                   ) : (
                     <div className="client-display">
-                      <div className="client-title">{row.entityTitle}</div>
+                      <div className="client-title" onClick={() => setActive(row)}>{row.entityTitle}</div>
                       <div className="actions">
                         <Button onClick={() => startEdit(row)} styleName='primary home' >Edit</Button>
                         {row.idEntity !== appContext.activeClient && <Button onClick={() => setActive(row)} styleName='primary home' >Set Active</Button>}

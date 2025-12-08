@@ -23,7 +23,8 @@ const Dashboard = () => {
       <br></br>
       <div className={`Dashboard ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`}>
         <Card cardHeading='Dashboard'>
-          <div className='kpi-grid'>
+          Coming Soon
+          {/* <div className='kpi-grid'>
             <div className='kpi'>
               <div className='kpi-label'>YTD Cash Flow</div>
               <div className='kpi-value'>$0</div>
@@ -39,13 +40,13 @@ const Dashboard = () => {
               <div className='kpi-value'>0</div>
               <div className='kpi-helper'>vs. OM targets / latest update</div>
             </div>
-          </div>
+          </div> */}
           <hr />
           <Card cardHeading='Recent Activity'>
-            <div className='empty-panel'>No recent activity yet.</div>
+            Coming Soon{/* <div className='empty-panel'>No recent activity yet.</div> */}
           </Card>
           <Card cardHeading='Upcoming'>
-            <div className='empty-panel'>No upcoming items.</div>
+            Coming Soon{/* <div className='empty-panel'>No upcoming items.</div> */}
           </Card>
         </Card>
       </div>

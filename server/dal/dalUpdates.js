@@ -16,7 +16,7 @@ const dalUpdates = {
       `"${data.revisedEquityMultiple}","${data.distributionGuidance}","${data.notes}")`;
 
     try {
-      db.dbo.query('CALL insertUpdate' + params, (err, result) => {
+      db.dbo.query('CALL insertCapUpdate' + params, (err, result) => {
         if (err) {
           console.error('Error inserting update:', err);
           callback(err, 'Error inserting update');
@@ -37,7 +37,7 @@ const dalUpdates = {
     const params = `("${data.idEntity}")`;
 
     try {
-      db.dbo.query('CALL selectUpdate' + params, (err, result) => {
+      db.dbo.query('CALL selectCapUpdate' + params, (err, result) => {
         if (err) {
           console.error('Error selecting update:', err);
           callback(err, 'Error selecting update');
@@ -58,7 +58,7 @@ const dalUpdates = {
     const params = `("${data.idProperty}")`;
 
     try {
-      db.dbo.query('CALL selectUpdatesByProperty' + params, (err, result) => {
+      db.dbo.query('CALL selectCapUpdatesByProperty' + params, (err, result) => {
         if (err) {
           console.error('Error selecting updates by property:', err);
           callback(err, 'Error selecting updates by property');
@@ -79,7 +79,7 @@ const dalUpdates = {
     const params = `("${data.idProperty}","${data.startDate}","${data.endDate}")`;
 
     try {
-      db.dbo.query('CALL selectUpdatesByDateRange' + params, (err, result) => {
+      db.dbo.query('CALL selectCapUpdatesByDateRange' + params, (err, result) => {
         if (err) {
           console.error('Error selecting updates by date range:', err);
           callback(err, 'Error selecting updates by date range');
@@ -103,7 +103,7 @@ const dalUpdates = {
       `"${data.revisedEquityMultiple}","${data.distributionGuidance}","${data.notes}")`;
 
     try {
-      db.dbo.query('CALL updateUpdate' + params, (err, result) => {
+      db.dbo.query('CALL updateCapUpdate' + params, (err, result) => {
         if (err) {
           console.error('Error updating update:', err);
           callback(err, 'Error updating update');
@@ -124,7 +124,7 @@ const dalUpdates = {
     const params = `("${data.idEntity}")`;
 
     try {
-      db.dbo.query('CALL deleteUpdate' + params, (err, result) => {
+      db.dbo.query('CALL deleteCapUpdate' + params, (err, result) => {
         if (err) {
           console.error('Error deleting update:', err);
           callback(err, 'Error deleting update');

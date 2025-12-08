@@ -79,7 +79,19 @@ const PropertiesAndPositions = () => {
     const done = (err, payload) => {
       setIsSaving(false)
       if (err || payload?.error) {
-        alert('Save failed')
+        // Build a helpful message for the user from available error info
+        const serverMsg = payload?.error || payload?.message || payload?.sqlMessage
+        const errMsg = err?.message || (typeof err === 'string' ? err : null)
+        const toJson = (v) => {
+          try {
+            return (typeof v === 'object') ? JSON.stringify(v, null, 2) : String(v)
+          } catch (e) {
+            try { return String(v) } catch (e2) { return 'Unserializable error' }
+          }
+        }
+        const details = serverMsg ? toJson(serverMsg) : (errMsg ? toJson(errMsg) : (payload ? toJson(payload) : 'Unknown error'))
+        // Show a clearer alert and log full objects for debugging
+        alert(`Save failed: ${details}`)
         console.error('save error', err, payload)
         return
       }
@@ -87,6 +99,8 @@ const PropertiesAndPositions = () => {
       const savedId = payload?.idEntity || row.idEntity
       setSelectedId(savedId)
       refreshList()
+      // Show success message
+      alert(isNew ? 'Property & Position created successfully!' : 'Property & Position updated successfully!')
     }
     const data = {...row, activeClient: appContext.activeClient}
     if (isNew) cdoPositions.add(data, done)

@@ -136,7 +136,7 @@ div.ca-ledger-wrapper {
 .ca-table-wrap { width: 100%; overflow-x: auto; }
 .ca-table { width: 100%; border-collapse: collapse; }
 .ca-table thead th { font-size: var(--font-xx-small, .75rem); opacity: .8; text-align: left; border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 85%)); padding: 6px 8px; }
-.ca-table td { border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 88%)); padding: 8px; }
+.ca-table td { border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 88%)); padding: 8px; font-size: var(--font-small, .85rem); }
 .ca-memo { max-width: 520px; }
 .ca-empty { font-size: var(--font-small, .75rem); opacity: .8; padding: 8px; }
 .ca-row-click { cursor: pointer; }

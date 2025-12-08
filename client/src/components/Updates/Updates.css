@@ -149,7 +149,7 @@ button.upd-select-bar {
 .upd-table-wrap { width: 100%; overflow-x: auto; }
 .upd-table { width: 100%; border-collapse: collapse; }
 .upd-table thead th { font-size: var(--font-xx-small, .75rem); opacity: .8; text-align: left; border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 85%)); padding: 6px 8px; }
-.upd-table td { border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 88%)); padding: 8px; }
+.upd-table td { border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 88%)); padding: 8px; font-size: var(--font-small, .85rem); }
 .upd-notes { max-width: 520px; }
 .upd-empty { font-size: var(--font-small, .75rem); opacity: .75; padding: 8px; }
 .upd-row-click { cursor: pointer; }

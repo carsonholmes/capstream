@@ -3,7 +3,11 @@
 import util from '../shared/util.js'
 import config from '../config.js'
 
-const servicesURL = `${config.server.url}:${config.server.webServicesPort}/positions/`
+var servicesURL = `${config.server.url}:${config.server.webServicesPort}/`
+if (config.server.url === "https://data.capstream.io") {
+  servicesURL = "https://data.capstream.io/"
+    }
+servicesURL += "positions/"
 
 export const getEmptyRow = () => ({
   // Property

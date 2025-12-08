@@ -1,7 +1,11 @@
 import util from '../shared/util.js';
 import config from '../config.js';
 
-var servicesURL = `${config.server.url}:${config.server.webServicesPort}/session/`;
+var servicesURL = `${config.server.url}:${config.server.webServicesPort}/`
+if (config.server.url === "https://data.capstream.io") {
+  servicesURL = "https://data.capstream.io/"
+    }
+servicesURL += "session/"
 
 class cdoSession {
     create = (data, callback) => {

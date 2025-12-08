@@ -10,67 +10,10 @@ import TextArea from '../controls/TextArea/TextArea'
 import DatePicker from '../controls/DatePicker/DatePicker'
 import './CashActivity.css'
 
-// ---- Minimal CDO stub (replace with real implementation later) -----------------
-class CashActivityCDO {
-  constructor() {
-    this._properties = [
-      { id: '1', name: 'Example Apartments' },
-      { id: '2', name: 'Ridge Office' }
-    ]
-    // seeded transactions
-    this._byProperty = {
-      '1': [
-        { id: 't-2025-07-15-1', propertyId: '1', propertyName: 'Example Apartments', activityDate: '2025-07-15', type: 'Distribution', amount: 3500, memo: 'Q2 distribution', method: 'ACH', periodStart: '2025-04-01', periodEnd: '2025-06-30' },
-        { id: 't-2025-03-20-1', propertyId: '1', propertyName: 'Example Apartments', activityDate: '2025-03-20', type: 'Capital Call', amount: -10000, memo: 'Roof reserve', method: 'Wire', periodStart: '2025-01-01', periodEnd: '2025-03-31' }
-      ],
-      '2': [
-        { id: 't-2025-08-10-1', propertyId: '2', propertyName: 'Ridge Office', activityDate: '2025-08-10', type: 'Distribution', amount: 2200, memo: 'Monthly distribution', method: 'ACH', periodStart: '2025-07-01', periodEnd: '2025-07-31' }
-      ]
-    }
-  }
-
-  get getEmptyRow() {
-    return {
-      id: null,
-      propertyId: '',
-      propertyName: '',
-      activityDate: '',
-      type: 'Distribution',
-      amount: '', // positive for inflow to LP, negative for outflow (capital call)
-      method: 'ACH',
-      memo: '',
-      periodStart: '',
-      periodEnd: '',
-      attachment: null
-    }
-  }
-
-  async listProperties(search = '') {
-    return this._properties.filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()))
-  }
-
-  async listActivities(propertyId) {
-    const list = this._byProperty[propertyId] || []
-    return [...list].sort((a, b) => String(b.activityDate).localeCompare(String(a.activityDate)))
-  }
-
-  async saveActivity(row) {
-    const id = row.id ?? `t-${Date.now()}`
-    const pid = row.propertyId
-    if (!this._byProperty[pid]) this._byProperty[pid] = []
-    const idx = this._byProperty[pid].findIndex(t => t.id === id)
-    const saved = { ...row, id }
-    if (idx >= 0) this._byProperty[pid][idx] = saved
-    else this._byProperty[pid].push(saved)
-    return saved
-  }
-
-  async uploadAttachment(file) {
-    return { name: file?.name ?? 'unnamed', size: file?.size ?? 0, id: String(Math.random()) }
-  }
-}
-const cdo = new CashActivityCDO()
-// -------------------------------------------------------------------------------
+// Real CDOs
+import cdoCashActivity, { getEmptyRow as getEmptyCashRow } from '../../cdo/cdoCashActivity'
+import cdoPositions from '../../cdo/cdoPositions'
+import cdoAttachments from '../../cdo/cdoAttachments'
 
 const CashActivity = () => {
   const { appContext } = React.useContext(AppContext)
@@ -85,7 +28,40 @@ const CashActivity = () => {
   const [filterType, setFilterType] = useState('All')
 
   // ---- form state --------------------------------------------------------------
-  const [row, setRow] = useState(cdo.getEmptyRow)
+  const mapServerToUI = (r = {}) => ({
+    id: r.idEntity || r.id || null,
+    propertyId: r.idProperty || r.propertyId || '',
+    propertyName: r.propertyName || '',
+    activityDate: r.activityDate || null,
+    type: r.activityType || r.type || 'Distribution',
+    amount: r.amount ?? '',
+    method: r.method || '',
+    memo: r.notes || r.memo || '',
+    periodStart: r.periodStart || '',
+    periodEnd: r.periodEnd || '',
+    attachment: r.attachment || null
+  })
+
+  const mapUIToServer = (u = {}) => {
+    const payload = {
+      idProperty: u.propertyId || undefined,
+      propertyName: u.propertyName || undefined,
+      activityDate: u.activityDate || undefined,
+      activityType: u.type || undefined,
+      amount: u.amount ?? undefined,
+      notes: u.memo || undefined,
+      method: u.method || undefined,
+      periodStart: u.periodStart || undefined,
+      periodEnd: u.periodEnd || undefined
+    }
+    // Only include idEntity if updating an existing record
+    if (u.id) payload.idEntity = u.id
+    return payload
+  }
+
+  const emptyUIRow = () => mapServerToUI(getEmptyCashRow())
+
+  const [row, setRow] = useState(emptyUIRow())
   const [isSaving, setIsSaving] = useState(false)
 
   // validations
@@ -98,8 +74,12 @@ const CashActivity = () => {
   // initial load
   useEffect(() => {
     let isMounted = true
-    cdo.listProperties('')
-      .then(list => { if (isMounted) setProperties(list) })
+    cdoPositions.listByClient({ activeClient: appContext.activeClient }, (err, list) => {
+      if (!err && isMounted) {
+        const props = Array.isArray(list) ? list.map(p => ({ id: p.idEntity || p.id, name: p.propertyName || p.propertyName })) : []
+        setProperties(props)
+      }
+    })
     return () => { isMounted = false }
   }, [])
 
@@ -107,7 +87,12 @@ const CashActivity = () => {
   useEffect(() => {
     let isMounted = true
     if (!selectedPropertyId) { setActivities([]); return }
-    cdo.listActivities(selectedPropertyId).then(list => { if (isMounted) setActivities(list) })
+    cdoCashActivity.listByProperty({ idProperty: selectedPropertyId }, (err, list) => {
+      if (!err && isMounted) {
+        const mapped = (Array.isArray(list) ? list : []).map(r => mapServerToUI(r))
+        setActivities(mapped)
+      }
+    })
     return () => { isMounted = false }
   }, [selectedPropertyId])
 
@@ -125,34 +110,60 @@ const CashActivity = () => {
     }))
   }
 
-  const clearForm = () => setRow({ ...cdo.getEmptyRow, propertyId: selectedPropertyId, propertyName: properties.find(p => p.id === selectedPropertyId)?.name || '' })
-
-  const onSave = async () => {
-    if (!canSubmit) return
-    try {
-      setIsSaving(true)
-      // normalize numeric amount
-      const amountNum = Number(row.amount)
-      const saved = await cdo.saveActivity({ ...row, amount: isFinite(amountNum) ? amountNum : row.amount })
-      setRow(saved)
-      const list = await cdo.listActivities(saved.propertyId)
-      setActivities(list)
-    } finally {
-      setIsSaving(false)
+  const clearForm = () => {
+    if (!selectedPropertyId) {
+      alert('Please select a property before adding a new cash activity.')
+      return
     }
+    setRow(prev => ({ ...emptyUIRow(), propertyId: selectedPropertyId, propertyName: properties.find(p => p.id === selectedPropertyId)?.name || '' }))
   }
 
-  const onFilePick = async (evt) => {
+  const onSave = () => {
+    if (!canSubmit) return
+    setIsSaving(true)
+    const send = mapUIToServer({ ...row, propertyName: row.propertyName || properties.find(p => p.id === selectedPropertyId)?.name || '' })
+    // ensure idProperty is present
+    if (!send.idProperty) send.idProperty = selectedPropertyId
+    const done = (err, payload) => {
+      setIsSaving(false)
+      if (err || payload?.error) {
+        alert('Save failed')
+        console.error('save error', err, payload)
+        return
+      }
+      const savedId = payload?.idEntity || payload?.id || row.id
+      const savedRow = mapServerToUI({ ...payload, idEntity: savedId })
+      setRow(savedRow)
+      // refresh list
+      cdoCashActivity.listByProperty({ idProperty: send.idProperty }, (lerr, list) => {
+        if (!lerr) setActivities((Array.isArray(list) ? list : []).map(r => mapServerToUI(r)))
+      })
+      // Show success message
+      alert(row.id ? 'Cash Activity updated successfully!' : 'Cash Activity created successfully!')
+    }
+
+    if (!row.id) cdoCashActivity.add(send, done)
+    else cdoCashActivity.update(send, done)
+  }
+
+  const onFilePick = (evt) => {
     const file = evt?.target?.files?.[0]
     if (!file) return
-    const meta = await cdo.uploadAttachment(file)
-    setRow(prev => ({ ...prev, attachment: meta }))
-    evt.target.value = ''
+    if (!row.id) { alert('Save the record before adding files.'); return }
+    cdoAttachments.uploadAttachment({ idEntity: row.id, file }, (aerr, meta) => {
+      if (aerr || meta?.error) {
+        alert('Upload failed')
+        console.error('upload error', aerr, meta)
+      } else {
+        setRow(prev => ({ ...prev, attachment: meta }))
+      }
+      if (evt?.target) evt.target.value = ''
+    })
   }
 
   const onEditRow = (t) => {
-    setRow({ ...cdo.getEmptyRow, ...t })
-    setSelectedPropertyId(t.propertyId)
+    setRow(prev => ({ ...emptyUIRow(), ...mapServerToUI(t) }))
+    setSelectedPropertyId(t.propertyId || t.idProperty)
   }
 
   const yearsForSelect = useMemo(() => {
@@ -181,6 +192,18 @@ const CashActivity = () => {
 
   const fmt = (n) => (n === '' || n === null || n === undefined) ? '' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
   const bg = appContext?.activeBackground || '#f5f5f5'
+
+  // format ISO/Date-ish strings to local date (short)
+  const fmtDate = (d) => {
+    if (!d) return ''
+    try {
+      const dt = (d instanceof Date) ? d : new Date(d)
+      if (isNaN(dt)) return String(d)
+      return dt.toLocaleDateString()
+    } catch (e) {
+      return String(d)
+    }
+  }
 
   return (
     <ContentContainer>
@@ -215,8 +238,8 @@ const CashActivity = () => {
       </div>
       <div className='ca-form-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
         <h2 className='segment-header'>{row.id ? 'Edit Cash Activity' : 'Add Cash Activity'}</h2>
-        <DatePicker id='activityDate' dataCol='activityDate' placeholder='Activity date' value={row.activityDate || null} onChange={update} />
-        <Select id='type' dataCol='type' type='text' value={row.type || 'Distribution'} label='Type' onChange={update}
+        <DatePicker id='activityDate' dataCol='activityDate' placeholder='Activity date' value={row.activityDate || null} onChange={update} disabled={!selectedPropertyId} />
+        <Select id='type' dataCol='type' type='text' value={row.type || 'Distribution'} label='Type' onChange={update} disabled={!selectedPropertyId}
           data={[
             { value: 'Distribution', caption: 'Distribution (to you)' },
             { value: 'Capital Call', caption: 'Capital Call (you pay)' },
@@ -224,22 +247,25 @@ const CashActivity = () => {
             { value: 'Expense', caption: 'Expense/Fees' }
           ]}
         />
-        <TextBox id='amount' dataCol='amount' value={row.amount} placeholder='Amount (use negative for outflow)' onChange={update} onSubmit={onSave} type='number' />
-        <TextBox id='method' dataCol='method' value={row.method} placeholder='Method (ACH, check, wire)' onChange={update} onSubmit={onSave} />
-        <DatePicker id='periodStart' dataCol='periodStart' placeholder='Period start (optional)' value={row.periodStart || null} onChange={update} />
-        <DatePicker id='periodEnd' dataCol='periodEnd' placeholder='Period end (optional)' value={row.periodEnd || null} onChange={update} />
-        <TextArea id='memo' dataCol='memo' value={row.memo} placeholder='Memo / Notes' onChange={update} />
+        <TextBox id='amount' dataCol='amount' value={row.amount} placeholder='Amount (use negative for outflow)' onChange={update} onSubmit={onSave} type='number' disabled={!selectedPropertyId} />
+        <TextBox id='method' dataCol='method' value={row.method} placeholder='Method (ACH, check, wire)' onChange={update} onSubmit={onSave} disabled={!selectedPropertyId} />
+        <DatePicker id='periodStart' dataCol='periodStart' placeholder='Period start (optional)' value={row.periodStart || null} onChange={update} disabled={!selectedPropertyId} />
+        <DatePicker id='periodEnd' dataCol='periodEnd' placeholder='Period end (optional)' value={row.periodEnd || null} onChange={update} disabled={!selectedPropertyId} />
+        <TextArea id='memo' dataCol='memo' value={row.memo} placeholder='Memo / Notes' onChange={update} disabled={!selectedPropertyId} />
       </div>
       <div className='ca-attachments' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
         <div className='ca-drop'>Drop statement/wire receipt (optional)</div>
-        <input type='file' onChange={onFilePick} />
+        <input type='file' onChange={onFilePick} disabled={!selectedPropertyId || !row.id} />
         {row.attachment && (
           <div className='ca-fileline'>Attached: {row.attachment.name} <span className='ca-file-meta'>({row.attachment.size} bytes)</span></div>
         )}
       </div>
       <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>{isSaving ? 'Saving…' : 'Save Activity'}</Button>
       <div className='ca-ledger-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
-        <h2 className='segment-header'>Cash ledger</h2>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <h2 className='segment-header'>Cash ledger</h2>
+          <Button styleName='primary' onClick={() => clearForm()} disabled={!selectedPropertyId}>Add New</Button>
+        </div>
         {selectedPropertyId ? (
           <div className='ca-table-wrap'>
             <table className='ca-table'>
@@ -259,11 +285,11 @@ const CashActivity = () => {
                 )}
                 {filtered.map(t => (
                   <tr key={t.id} onClick={() => onEditRow(t)} className='ca-row-click'>
-                    <td>{t.activityDate || ''}</td>
+                    <td>{fmtDate(t.activityDate)}</td>
                     <td>{t.type}</td>
                     <td>{fmt(Number(t.amount) || 0)}</td>
                     <td>{t.method || ''}</td>
-                    <td>{(t.periodStart && t.periodEnd) ? `${t.periodStart} – ${t.periodEnd}` : ''}</td>
+                    <td>{(t.periodStart || t.periodEnd) ? `${fmtDate(t.periodStart)} – ${fmtDate(t.periodEnd)}` : ''}</td>
                     <td className='ca-memo'>{t.memo}</td>
                   </tr>
                 ))}

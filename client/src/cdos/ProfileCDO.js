@@ -2,9 +2,11 @@ import bcrypt from 'bcryptjs'
 import util from '../shared/util.js'
 import config from '../config/appConfig.js'
 
-let port = ""
-if (config.server.webServicesPort !== 0) port = `:${config.server.webServicesPort}`
-var servicesURL = `${config.server.url}${port}/user/`
+var servicesURL = `${config.server.url}:${config.server.webServicesPort}/`
+if (config.server.url === "https://data.capstream.io") {
+  servicesURL = "https://data.capstream.io/"
+    }
+servicesURL += "user/"
 
 const saltRounds = 13;
 
