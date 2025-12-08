@@ -35,6 +35,36 @@ div.updates-wrapper {
     }
 }
 
+div.updates-wrapper .input-container:has(#distributionGuidance) {
+  grid-column: 1;
+  @media (min-width: 900px) {
+      grid-column: 3 / span 2;
+    }
+}
+
+/* Make input wrappers stretch to fill their grid cell when inside pap-wrapper */
+.updates-wrapper .input-container {
+  width: 100%;
+  margin-inline: 0;
+  justify-self: stretch;
+}
+
+.updates-wrapper div {
+  background-color: white;
+  border: 1px solid gray;
+}
+
+.updates-wrapper > * {    /* does this do anything? According to copilot, it prevents a child with intrinsic min-width from breaking the grid. */
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+div.updates-wrapper div.text-area-container {
+    @media (min-width: 900px) {
+      grid-column: span 6;
+    }
+}
+
 div.updates-attachments {
     align-items: center;
     border: var(--border);
@@ -113,7 +143,7 @@ button.upd-select-bar {
 .updates-file-meta { opacity:.7; font-size: var(--font-xx-small, .75rem); }
 
 /* Actions */
-.upd-actions { justify-self: start; margin-top: 8px; }
+/* .upd-actions { justify-self: start; margin-top: 8px; } */
 
 /* Timeline table */
 .upd-table-wrap { width: 100%; overflow-x: auto; }
@@ -121,9 +151,9 @@ button.upd-select-bar {
 .upd-table thead th { font-size: var(--font-xx-small, .75rem); opacity: .8; text-align: left; border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 85%)); padding: 6px 8px; }
 .upd-table td { border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 88%)); padding: 8px; }
 .upd-notes { max-width: 520px; }
-.upd-empty { opacity: .8; padding: 8px; }
+.upd-empty { font-size: var(--font-small, .75rem); opacity: .75; padding: 8px; }
 .upd-row-click { cursor: pointer; }
-.upd-hint { font-size: var(--font-xx-small, .75rem); opacity: .75; margin-top: 8px; }
+.upd-hint { font-size: var(--font-small, .75rem); opacity: .75; margin-top: 8px; }
 
 /* Responsive */
 @media (min-width: 900px) {

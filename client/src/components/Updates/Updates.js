@@ -197,7 +197,7 @@ const Updates = () => {
         )}
       </div>
 
-      <div className='upd-actions'>
+      <div>
         <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>
           {isSaving ? 'Saving…' : 'Save Update'}
         </Button>

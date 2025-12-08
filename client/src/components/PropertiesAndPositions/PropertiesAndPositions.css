@@ -51,6 +51,12 @@ div.pap-wrapper {
   min-width: 0;
 }
 
+div.pap-wrapper div.text-area-container {
+    @media (min-width: 900px) {
+      grid-column: span 6;
+    }
+}
+
 div.ownership-and-help {
   background-color: var(--background-color);
   border: none !important;

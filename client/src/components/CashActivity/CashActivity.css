@@ -1,7 +1,98 @@
-/* -------------------------------------------------------------------------- */
-/* CashActivity.css */
+.ca-select {
+    align-items: center;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    column-gap: 1rem;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+    padding: 2rem 1rem 1rem;
+    row-gap: 2rem;
+    width: 90%;
+}
 
-.CashActivity { width: 100%; }
+div.ca-form-wrapper {
+    align-items: center;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 2rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    width: 90%;
+    @media (min-width: 900px) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+
+/* Make input wrappers stretch to fill their grid cell when inside pap-wrapper */
+.ca-form-wrapper .input-container {
+  width: 100%;
+  margin-inline: 0;
+  justify-self: stretch;
+}
+
+.ca-form-wrapper div {
+  background-color: white;
+  border: 1px solid gray;
+}
+
+.ca-form-wrapper > * {    /* does this do anything? According to copilot, it prevents a child with intrinsic min-width from breaking the grid. */
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  div.ca-form-wrapper div.text-area-container {
+    grid-column: span 6;
+}
+div.ca-form-wrapper .input-container:has(.cs-date-field),
+div.ca-form-wrapper .input-container:has(select),
+div.ca-form-wrapper .input-container:has(input) {
+    grid-column: span 3;
+  }
+}
+
+div.ca-attachments {
+    align-items: center;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    width: 90%; 
+}
+
+.ca-drop {
+  background:var(--input-bg-color, #fafafa);
+  border:2px dashed var(--panel-border-color, hsl(0 0% 85%));
+  border-radius: var(--border-radius); 
+  color:var(--muted-black, #555);
+  font-size: var(--font-medium-large);
+  padding: 0.75rem; 
+}
+
+div.ca-ledger-wrapper {
+  align-items: center;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  width: 90%; 
+}
+
+/* .CashActivity { width: 100%; } */
 
 /* Top bar */
 .ca-topbar {
@@ -31,11 +122,11 @@
 .ca-date, .ca-actions { width: 100%; }
 
 /* Attachments */
-.ca-attachments { display: grid; gap: 8px; margin-top: 8px; }
+/* .ca-attachments { display: grid; gap: 8px; margin-top: 8px; } */
 .ca-attach-label { font-size: var(--font-xx-small, .8rem); opacity: .8; }
-.ca-drop { border: 2px dashed var(--panel-border-color, hsl(0 0% 85%)); border-radius: 10px; padding: 12px; text-align: center; color: var(--muted-black, #555); background: var(--input-bg-color, #fafafa); }
-.ca-file { display: inline-block; }
-.ca-fileline { font-size: var(--font-small, .9rem); }
+/* .ca-drop { border: 2px dashed var(--panel-border-color, hsl(0 0% 85%)); border-radius: 10px; padding: 12px; text-align: center; color: var(--muted-black, #555); background: var(--input-bg-color, #fafafa); } */
+/* .ca-file { display: inline-block; } */
+/* .ca-fileline { font-size: var(--font-small, .9rem); } */
 .ca-file-meta { opacity:.7; font-size: var(--font-xx-small, .75rem); }
 
 /* Actions */
@@ -47,9 +138,9 @@
 .ca-table thead th { font-size: var(--font-xx-small, .75rem); opacity: .8; text-align: left; border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 85%)); padding: 6px 8px; }
 .ca-table td { border-bottom: 1px solid var(--panel-border-color, hsl(0 0% 88%)); padding: 8px; }
 .ca-memo { max-width: 520px; }
-.ca-empty { opacity: .8; padding: 8px; }
+.ca-empty { font-size: var(--font-small, .75rem); opacity: .8; padding: 8px; }
 .ca-row-click { cursor: pointer; }
-.ca-hint { font-size: var(--font-xx-small, .75rem); opacity: .75; margin-top: 8px; }
+.ca-hint { font-size: var(--font-small, .75rem); opacity: .75; margin-top: 8px; }
 
 /* Responsive */
 @media (min-width: 900px) {

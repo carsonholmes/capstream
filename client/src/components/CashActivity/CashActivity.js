@@ -180,136 +180,100 @@ const CashActivity = () => {
   }, [activities, filtered])
 
   const fmt = (n) => (n === '' || n === null || n === undefined) ? '' : n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const bg = appContext?.activeBackground || '#f5f5f5'
 
   return (
     <ContentContainer>
-      <div className={`CashActivity ${appContext?.darkMode ? 'dark-mode' : 'light-mode'}`}>
-        {/* Select Property & Filters */}
-        <Card cardHeading=''>
-          <div className='ca-topbar'>
-            <Select
-              id='propertySelect'
-              dataCol='propertyId'
-              label='Property'
-              type='text'
-              value={selectedPropertyId || ''}
-              data={[{ value: '', caption: 'Select a property' }, ...properties.map(p => ({ value: String(p.id), caption: p.name }))]}
-              onChange={onPickProperty}
-            />
-            <Select
-              id='filterYear'
-              dataCol='filterYear'
-              type='text'
-              label='Year'
-              value={filterYear}
-              data={yearsForSelect.map(y => ({ value: y, caption: String(y) }))}
-              onChange={(col, v) => setFilterYear(v)}
-            />
-            <Select
-              id='filterType'
-              dataCol='filterType'
-              type='text'
-              label='Type'
-              value={filterType}
-              data={['All', 'Distribution', 'Capital Call', 'Contribution', 'Expense'].map(t => ({ value: t, caption: t }))}
-              onChange={(col, v) => setFilterType(v)}
-            />
-          </div>
-        </Card>
-
-        {/* Quick totals */}
-        <Card cardHeading='Totals'>
-          <div className='ca-totals'>
-            <div className='ca-total'><div className='ca-total-label'>All-time</div><div className='ca-total-value'>{fmt(totals.all)}</div></div>
-            <div className='ca-total'><div className='ca-total-label'>YTD</div><div className='ca-total-value'>{fmt(totals.ytd)}</div></div>
-            <div className='ca-total'><div className='ca-total-label'>Filtered</div><div className='ca-total-value'>{fmt(totals.filtered)}</div></div>
-          </div>
-        </Card>
-
-        {/* Entry form */}
-        <Card cardHeading={row.id ? 'Edit Cash Activity' : 'Add Cash Activity'}>
-          <div className='ca-row cols-3'>
-            <div className='ca-date'>
-              <DatePicker id='activityDate' dataCol='activityDate' placeholder='Activity date' value={row.activityDate || null} onChange={update} />
-            </div>
-            <Select id='type' dataCol='type' type='text' value={row.type || 'Distribution'} label='Type' onChange={update}
-              data={[
-                { value: 'Distribution', caption: 'Distribution (to you)' },
-                { value: 'Capital Call', caption: 'Capital Call (you pay)' },
-                { value: 'Contribution', caption: 'Additional Contribution' },
-                { value: 'Expense', caption: 'Expense/Fees' }
-              ]}
-            />
-            <TextBox id='amount' dataCol='amount' value={row.amount} placeholder='Amount (use negative for outflow)' onChange={update} onSubmit={onSave} type='number' />
-
-            <TextBox id='method' dataCol='method' value={row.method} placeholder='Method (ACH, check, wire)' onChange={update} onSubmit={onSave} />
-            <div className='ca-date'>
-              <DatePicker id='periodStart' dataCol='periodStart' placeholder='Period start (optional)' value={row.periodStart || null} onChange={update} />
-            </div>
-            <div className='ca-date'>
-              <DatePicker id='periodEnd' dataCol='periodEnd' placeholder='Period end (optional)' value={row.periodEnd || null} onChange={update} />
-            </div>
-
-            <div className='ca-span-3'>
-              <TextArea id='memo' dataCol='memo' value={row.memo} placeholder='Memo / Notes' onChange={update} />
-            </div>
-          </div>
-
-          {/* Attachment */}
-          <div className='ca-attachments'>
-            <label className='ca-attach-label'>Attachment</label>
-            <div className='ca-drop'>Drop statement/wire receipt (optional)</div>
-            <input className='ca-file' type='file' onChange={onFilePick} />
-            {row.attachment && (
-              <div className='ca-fileline'>Attached: {row.attachment.name} <span className='ca-file-meta'>({row.attachment.size} bytes)</span></div>
-            )}
-          </div>
-
-          {/* Actions */}
-          <div className='ca-actions'>
-            <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>
-              {isSaving ? 'Saving…' : 'Save Activity'}
-            </Button>
-          </div>
-        </Card>
-
-        {/* Ledger table */}
-        <Card cardHeading='Cash ledger'>
-          {selectedPropertyId ? (
-            <div className='ca-table-wrap'>
-              <table className='ca-table'>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Method</th>
-                    <th>Period</th>
-                    <th>Memo</th>
+      <div className='ca-select' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <Select
+          id='propertySelect'
+          dataCol='propertyId'
+          label='Property'
+          type='text'
+          value={selectedPropertyId || ''}
+          data={[{ value: '', caption: 'Select a property' }, ...properties.map(p => ({ value: String(p.id), caption: p.name }))]}
+          onChange={onPickProperty}
+        />
+        <Select
+          id='filterYear'
+          dataCol='filterYear'
+          type='text'
+          label='Year'
+          value={filterYear}
+          data={yearsForSelect.map(y => ({ value: y, caption: String(y) }))}
+          onChange={(col, v) => setFilterYear(v)}
+        />
+        <Select
+          id='filterType'
+          dataCol='filterType'
+          type='text'
+          label='Type'
+          value={filterType}
+          data={['All', 'Distribution', 'Capital Call', 'Contribution', 'Expense'].map(t => ({ value: t, caption: t }))}
+          onChange={(col, v) => setFilterType(v)}
+        />
+      </div>
+      <div className='ca-form-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <h2 className='segment-header'>{row.id ? 'Edit Cash Activity' : 'Add Cash Activity'}</h2>
+        <DatePicker id='activityDate' dataCol='activityDate' placeholder='Activity date' value={row.activityDate || null} onChange={update} />
+        <Select id='type' dataCol='type' type='text' value={row.type || 'Distribution'} label='Type' onChange={update}
+          data={[
+            { value: 'Distribution', caption: 'Distribution (to you)' },
+            { value: 'Capital Call', caption: 'Capital Call (you pay)' },
+            { value: 'Contribution', caption: 'Additional Contribution' },
+            { value: 'Expense', caption: 'Expense/Fees' }
+          ]}
+        />
+        <TextBox id='amount' dataCol='amount' value={row.amount} placeholder='Amount (use negative for outflow)' onChange={update} onSubmit={onSave} type='number' />
+        <TextBox id='method' dataCol='method' value={row.method} placeholder='Method (ACH, check, wire)' onChange={update} onSubmit={onSave} />
+        <DatePicker id='periodStart' dataCol='periodStart' placeholder='Period start (optional)' value={row.periodStart || null} onChange={update} />
+        <DatePicker id='periodEnd' dataCol='periodEnd' placeholder='Period end (optional)' value={row.periodEnd || null} onChange={update} />
+        <TextArea id='memo' dataCol='memo' value={row.memo} placeholder='Memo / Notes' onChange={update} />
+      </div>
+      <div className='ca-attachments' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <div className='ca-drop'>Drop statement/wire receipt (optional)</div>
+        <input type='file' onChange={onFilePick} />
+        {row.attachment && (
+          <div className='ca-fileline'>Attached: {row.attachment.name} <span className='ca-file-meta'>({row.attachment.size} bytes)</span></div>
+        )}
+      </div>
+      <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>{isSaving ? 'Saving…' : 'Save Activity'}</Button>
+      <div className='ca-ledger-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <h2 className='segment-header'>Cash ledger</h2>
+        {selectedPropertyId ? (
+          <div className='ca-table-wrap'>
+            <table className='ca-table'>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Period</th>
+                  <th>Memo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.length === 0 && (
+                  <tr><td colSpan={6} className='ca-empty'>No activity for the selected filters.</td></tr>
+                )}
+                {filtered.map(t => (
+                  <tr key={t.id} onClick={() => onEditRow(t)} className='ca-row-click'>
+                    <td>{t.activityDate || ''}</td>
+                    <td>{t.type}</td>
+                    <td>{fmt(Number(t.amount) || 0)}</td>
+                    <td>{t.method || ''}</td>
+                    <td>{(t.periodStart && t.periodEnd) ? `${t.periodStart} – ${t.periodEnd}` : ''}</td>
+                    <td className='ca-memo'>{t.memo}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filtered.length === 0 && (
-                    <tr><td colSpan={6} className='ca-empty'>No activity for the selected filters.</td></tr>
-                  )}
-                  {filtered.map(t => (
-                    <tr key={t.id} onClick={() => onEditRow(t)} className='ca-row-click'>
-                      <td>{t.activityDate || ''}</td>
-                      <td>{t.type}</td>
-                      <td>{fmt(Number(t.amount) || 0)}</td>
-                      <td>{t.method || ''}</td>
-                      <td>{(t.periodStart && t.periodEnd) ? `${t.periodStart} – ${t.periodEnd}` : ''}</td>
-                      <td className='ca-memo'>{t.memo}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className='ca-hint'>Click a row to edit.</div>
-            </div>
-          ) : (
-            <div className='ca-empty'>Select a property to view and add cash activity.</div>
-          )}
-        </Card>
+                ))}
+              </tbody>
+            </table>
+            <div className='ca-hint'>Click a row to edit.</div>
+          </div>
+        ) : (
+          <div className='ca-empty'>Select a property to view and add cash activity.</div>
+        )}
       </div>
     </ContentContainer>
   )
