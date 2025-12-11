@@ -1,13 +1,19 @@
+.show-passwords {
+    margin: -2rem 0;
+}
+
 div.check-read {
     width: 90%;
 }
+
 span.read-eula {
     color: var(--primary-color);
     cursor: pointer;
+    display: inline-block;
     font-size: clamp(1rem, 5vw, 1.25rem);
     font-weight: 600;
-    margin-left: .5rem;
 }
+
 span.read-eula:hover {
     color: var(--primary-offset-color);
 }

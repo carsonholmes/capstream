@@ -207,7 +207,7 @@ const CashActivity = () => {
 
   return (
     <ContentContainer>
-      <div className='ca-select' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+      <div className='flex-wrapper-row' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
         <Select
           id='propertySelect'
           dataCol='propertyId'
@@ -236,8 +236,8 @@ const CashActivity = () => {
           onChange={(col, v) => setFilterType(v)}
         />
       </div>
-      <div className='ca-form-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
-        <h2 className='segment-header'>{row.id ? 'Edit Cash Activity' : 'Add Cash Activity'}</h2>
+      <div className='grid-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
+        <h2>{row.id ? 'Edit Cash Activity' : 'Add Cash Activity'}</h2>
         <DatePicker id='activityDate' dataCol='activityDate' placeholder='Activity date' value={row.activityDate || null} onChange={update} disabled={!selectedPropertyId} />
         <Select id='type' dataCol='type' type='text' value={row.type || 'Distribution'} label='Type' onChange={update} disabled={!selectedPropertyId}
           data={[
@@ -261,9 +261,9 @@ const CashActivity = () => {
         )}
       </div>
       <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>{isSaving ? 'Saving…' : 'Save Activity'}</Button>
-      <div className='ca-ledger-wrapper' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`}}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <h2 className='segment-header'>Cash ledger</h2>
+      <div className='flex-wrapper-column' style={{ backgroundColor:`color-mix(in oklch, white 95%, ${bg} 5%)`, marginTop: '2rem'}}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-evenly', padding: '0 1rem', width: '100%' }}>
+          <h2>Cash ledger</h2>
           <Button styleName='primary' onClick={() => clearForm()} disabled={!selectedPropertyId}>Add New</Button>
         </div>
         {selectedPropertyId ? (

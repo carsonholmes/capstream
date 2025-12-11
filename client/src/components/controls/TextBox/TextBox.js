@@ -53,36 +53,16 @@ const TextBox = (props) => {
   // Display-only mode
   if (props.displayOnly) {
     return (
-      <div
-        className={
-          props.styleName
-            ? `input-container ${props.styleName} ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`
-            : `input-container ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`
-        }
-      >
-        <label htmlFor={props.id} className="display-label">
-          {props.placeholder}
-        </label>
-        <label
-          id={props.id}
-          className={props.styleName ? `display-value ${props.styleName}` : 'display-value'}
-          onClick={props.onClick}
-        >
-          {props.value}
-        </label>
+      <div className={props.styleName ? `input-container ${props.styleName} ${appContext.darkMode ? 'dark-mode' : 'light-mode'}` : `input-container ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`}>
+        <label htmlFor={props.id} className="display-label">{props.placeholder}</label>
+        <label id={props.id} className={props.styleName ? `display-value ${props.styleName}` : 'display-value'} onClick={props.onClick}>{props.value}</label>
       </div>
     );
   }
 
   // Editable input
   return (
-    <div
-      className={
-        props.styleName
-          ? `input-container ${props.styleName} ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`
-          : `input-container ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`
-      }
-    >
+    <div className={props.styleName ? `input-container ${props.styleName} ${appContext.darkMode ? 'dark-mode' : 'light-mode'}` : `input-container ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`}>
       <input
         id={props.id}
         value={props.value}
@@ -102,14 +82,8 @@ const TextBox = (props) => {
         inputMode={props.inputMode || (props.type === 'number' ? 'decimal' : undefined)}
         onKeyDown={keyDown}
         autoComplete="off"
-        name={props.name}
-      />
-      <label
-        htmlFor={props.id}
-        className={props.error ? 'input-label error-label' : 'input-label'}
-      >
-        {props.placeholder}
-      </label>
+        name={props.name}/>
+      <label htmlFor={props.id} className={props.error ? 'input-label error-label' : 'input-label'}>{props.placeholder}</label>
       {displayErrorMessage && <div className="input-error">{props.emptyError}</div>}
     </div>
   );

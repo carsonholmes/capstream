@@ -4,7 +4,7 @@ a.nav-link {
     /* display: inline-block; */
     font-size: var(--font-medium);
     font-weight: 600;
-    margin-top: 1.5rem;
+    /* margin-top: 1.5rem; */
     text-decoration: none;
     transition: .3s ease-in-out;
 }

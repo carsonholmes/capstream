@@ -1,5 +1,5 @@
-import React, {useState, useRef} from 'react'
-import {AppContext} from '../../../AppContext'
+import React, { useState, useRef } from 'react'
+import { AppContext } from '../../../AppContext'
 import ContentContainer from '../../ContentContainer/ContentContainer'
 import TextBox from '../../controls/TextBox/TextBox'
 import PasswordBox from '../../controls/PasswordBox/PasswordBox'
@@ -9,21 +9,22 @@ import CheckBox from '../../controls/CheckBox/CheckBox'
 import Button from '../../controls/buttons/Button'
 import ProfileCDO from '../../../cdos/ProfileCDO'
 //import CartCDO from '../../../cdos/CartCDO'
-import '../SignUp/SignUp.css'
+import './SignIn.css'
+
 const cdo = new ProfileCDO();
 //const cdoCart = new CartCDO();
 
 const SignIn = (props) => {
 
-    const [credentials, setCredentials] = useState({userNameOrEmail: '', userPassword: ''})
+    const [credentials, setCredentials] = useState({ userNameOrEmail: '', userPassword: '' })
     const [isInvalidCreds, setIsInvalidCreds] = useState(false)
     const [signInInProgress, setSignInInProgress] = useState(false)
     const [isMultipleAccounts, setIsMultipleAccounts] = useState(false)
-    const {appContext, setAppContext} = React.useContext(AppContext);
+    const { appContext, setAppContext } = React.useContext(AppContext);
     const newContext = useRef();
     const [isPasswordHidden, setIsPasswordHidden] = useState(true)
     const [isFocused, setIsFocused] = useState(false)
-    
+
     const updateCredentials = (dataCol, newValue) => {
         let newCreds = JSON.parse(JSON.stringify(credentials))
         newCreds[dataCol] = newValue
@@ -31,7 +32,7 @@ const SignIn = (props) => {
         setIsInvalidCreds(false)
         setIsMultipleAccounts(false)
     }
-    
+
     const signIn = () => {
         if (enableSubmit() && !signInInProgress) {
             setSignInInProgress(true)
@@ -39,10 +40,10 @@ const SignIn = (props) => {
             cdo.signIn(credentials, cbSignIn)
         }
     }
-    
+
     const cbSignIn = (error, data) => {
         if (!error && data.response === 'Success') {
-            newContext.current = {...appContext}
+            newContext.current = { ...appContext }
             for (let itemName in data.session) {
                 newContext.current[itemName] = data.session[itemName]
             }
@@ -91,27 +92,26 @@ const SignIn = (props) => {
 
     return (
         <ContentContainer onSubmit={signIn}>
-            <Card cardHeading='Sign In'>
-                <TextBox id='userNameOrEmail' dataCol='userNameOrEmail' placeholder='User Name or Email Address' onFocus={()=>setIsFocused(true)}
-                    onChange={updateCredentials} onBlur={()=>setIsFocused(false)}></TextBox>
-                <PasswordBox id='userPassword' dataCol='userPassword' placeholder='Password' onFocus={()=>setIsFocused(true)}
-                     onBlur={()=>setIsFocused(false)} type={isPasswordHidden ? 'password' : 'text'}
-                     onChange={updateCredentials}></PasswordBox>
-                <CheckBox id='showPassword' dataCol='showPassword' onChange={()=>setIsPasswordHidden(!isPasswordHidden)}
-                    >Show password</CheckBox>
-                <Button styleName='primary submit' disabled={!enableSubmit()}
-                    onClick={signIn}>Sign In</Button>
+            <div className='flex-wrapper-column'>
+                <h2 className='segment-header'>Sign In</h2>
+                <TextBox id='userNameOrEmail' dataCol='userNameOrEmail' placeholder='User Name or Email Address' onFocus={() => setIsFocused(true)}
+                    onChange={updateCredentials} onBlur={() => setIsFocused(false)}></TextBox>
+                <PasswordBox id='userPassword' dataCol='userPassword' placeholder='Password' onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)} type={isPasswordHidden ? 'password' : 'text'}
+                    onChange={updateCredentials}></PasswordBox>
+                <CheckBox id='showPassword' styleName='show-password' dataCol='showPassword' onChange={() => setIsPasswordHidden(!isPasswordHidden)}>Show password</CheckBox>
+                <Button styleName='primary submit' disabled={!enableSubmit()} onClick={signIn}>Sign In</Button>
                 {isInvalidCreds && !isFocused && <div className='input-error error-top-margin'>
                     User name or password is not valid.</div>}
                 {isMultipleAccounts && !isFocused && <div className='input-error error-top-margin'>
                     Multiple accounts exist for that email address, please log in with user name</div>}
                 <NavLink onClick={clickForgotPassword}>
                     Forgot User Name or Password?</NavLink>
-            </Card>
-            <Card>
+            </div>
+            <div className='flex-wrapper-column'>
                 <div className='card-text'>Don't have an account?</div>
                 <NavLink onClick={clickSignUp}>Sign up</NavLink>
-            </Card>
+            </div>
         </ContentContainer>
     )
 }

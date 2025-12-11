@@ -7,12 +7,8 @@
   background-color: var(--app-bg-color); /* Match App body background color */
 }
 
-h2 {
-  margin: 1vh 0;
-}
-
 a {
-  color: var(--secondary-offset-color);
+    color: var(--secondary-offset-color);
 }
 
 .About-content {
@@ -22,6 +18,9 @@ a {
   flex-direction: column;
   justify-content: left !important;
   overflow-y: auto;
+  & h2 {
+    margin: 1vh 0;
+  }
 }
 
 .dark-mode .About {
