@@ -30,23 +30,12 @@ const Home = (props) => {
     return (
         <ContentContainer>
             <div className={`home ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`}>
-                <br></br>
-                <br></br>
                 <h1 className='home'>Welcome to CapStream.io</h1>
-                <br></br>
-                <br></br>
-                Sign In or Sign Up to access CapStream functionality.
-                <br></br>
-                <br></br>
-                <br></br>
+                <h2>Sign In or Sign Up to access CapStream functionality.</h2>
                 <div className='home-button-container'>
                     <Button styleName='primary sign-in home' onClick={clickSignIn}>Sign In</Button>
                     <Button styleName='primary sign-in home' onClick={clickSignUp}>Sign Up</Button>
                 </div>
-                <br></br>
-                <br></br>
-               
-                
             </div>
         </ContentContainer>
     )

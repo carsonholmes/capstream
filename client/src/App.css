@@ -66,6 +66,7 @@ select {
 
 div.grid-wrapper {
     align-items: center;
+    background-color: var(--background-color);
     border: var(--border);
     border-radius: var(--border-radius);
     display: grid;
@@ -150,7 +151,7 @@ div.grid-wrapper div.text-area-container {
 div.flex-wrapper-column,
 div.flex-wrapper-row {
     align-items: center;
-    background-color: color-mix(in oklch, white 95%, var(--primary-color) 5%);
+    background-color: var(--background-color);
     border: var(--border);
     border-radius: var(--border-radius);
     display: flex;

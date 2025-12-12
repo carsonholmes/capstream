@@ -1,5 +1,5 @@
 header.app-header {
-  background-color: var(--header-bg-color);
+  background-color: var(--background-color);
   height: 8vh; /* Reduced height */
   min-height: 50px;
   display: flex;

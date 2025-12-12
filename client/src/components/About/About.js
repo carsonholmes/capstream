@@ -12,7 +12,7 @@ function About() {
   }
 
   return (
-    <div className={`About ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`}>
+    // <div className={`About ${appContext.darkMode ? 'dark-mode' : 'light-mode'}`}>
       <div className="About-content">
         <h1>About CapStream.io</h1>
         <p>
@@ -48,7 +48,7 @@ function About() {
           in helping us make <strong>CapStream.io</strong> the go-to solution for investment tracking.
         </p>
       </div>
-    </div>
+    // </div>
   );
 }
 
