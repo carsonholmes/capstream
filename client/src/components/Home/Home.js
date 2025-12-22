@@ -33,8 +33,8 @@ const Home = (props) => {
                 <h1 className='home'>Welcome to CapStream.io</h1>
                 <h2>Sign In or Sign Up to access CapStream functionality.</h2>
                 <div className='home-button-container'>
-                    <Button styleName='primary sign-in home' onClick={clickSignIn}>Sign In</Button>
-                    <Button styleName='primary sign-in home' onClick={clickSignUp}>Sign Up</Button>
+                    <Button styleName='primary sign-in home default-color' onClick={clickSignIn}>Sign In</Button>
+                    <Button styleName='primary sign-in home default-color' onClick={clickSignUp}>Sign Up</Button>
                 </div>
             </div>
         </ContentContainer>

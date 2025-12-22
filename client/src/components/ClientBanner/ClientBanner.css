@@ -58,7 +58,6 @@ button.switch {
   display: flex;
   justify-content: center;
   gap: 2vw;
-  /* padding: 0 8px; */
   width: 100%;
   overflow: auto; /* just in case of localization length growth */
   border-top: 1px solid rgba(0,0,0,.08);
@@ -80,17 +79,17 @@ button.switch {
 }
 
 .client-banner__tab:hover {
-  background-color: color-mix(in oklch, white 10%, var(--client-bg) 75%);
+  background-color: color-mix(in oklch, white 10%, var(--client-bg) 90%);
 }
 
-.client-banner__tab .tab-label {
+/* .client-banner__tab .tab-label {
   display: inline-block;
   transition: transform .25s ease-in-out;
 }
 
 .client-banner__tab:hover .tab-label {
   transform: scale(1.25);
-}
+} */
 
 .client-banner__tab:focus-visible {
   box-shadow: 0 0 0 3px rgba(0, 120, 212, .35);

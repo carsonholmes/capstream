@@ -1,7 +1,11 @@
 import React from 'react'
+// import { AppContext } from '../../../AppContext'
 // uses styling from App.css
 
 const Button = (props) => {
+    
+    // const { appContext, setAppContext } = React.useContext(AppContext)
+    // const clientColor = appContext?.activeBackground || 'var(--primary-color)'
     
     const setStyle = () => {
         var style = 'standard'

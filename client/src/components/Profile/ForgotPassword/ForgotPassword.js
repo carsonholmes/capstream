@@ -77,13 +77,13 @@ const ForgotPassword = (props) => {
                 <EmailBox id='emailAddress' dataCol='emailAddress' value={forgotData.emailAddress} placeholder='Email'
                     onChange={updateForgotData} onSubmit={forgotUserName} emailValidity={setIsEmailValid}>
                 </EmailBox>
-                <Button styleName='primary submit' enabled={!enableGetUserName()}
+                <Button styleName='primary submit default-color' enabled={!enableGetUserName()}
                     onClick={forgotUserName}>Get User Name</Button>
                 <br />
                 <h3 className='segment-subheader'>Forgot password?</h3>
                 <TextBox id='userNameOrEmail' dataCol='userNameOrEmail' value={forgotData.userNameOrEmail}
                     placeholder='User Name or Email' onChange={updateForgotData}></TextBox>
-                <Button styleName='primary submit' diabled={!enableForgotPassword()}
+                <Button styleName='primary submit default-color' diabled={!enableForgotPassword()}
                     onClick={forgotPassword}>Reset Password</Button>
                 <br />
                 <NavLink styleName='page-link' onClick={clickSignIn}>Back to Sign In</NavLink>

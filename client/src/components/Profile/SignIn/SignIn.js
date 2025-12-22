@@ -100,7 +100,7 @@ const SignIn = (props) => {
                     onBlur={() => setIsFocused(false)} type={isPasswordHidden ? 'password' : 'text'}
                     onChange={updateCredentials}></PasswordBox>
                 <CheckBox id='showPassword' styleName='show-password' dataCol='showPassword' onChange={() => setIsPasswordHidden(!isPasswordHidden)}>Show password</CheckBox>
-                <Button styleName='primary submit' disabled={!enableSubmit()} onClick={signIn}>Sign In</Button>
+                <Button styleName='primary submit default-color' disabled={!enableSubmit()} onClick={signIn}>Sign In</Button>
                 {isInvalidCreds && !isFocused && <div className='input-error error-top-margin'>
                     User name or password is not valid.</div>}
                 {isMultipleAccounts && !isFocused && <div className='input-error error-top-margin'>

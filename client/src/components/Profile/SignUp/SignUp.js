@@ -147,7 +147,7 @@ const SignUp = () => {
                         </CheckBox>
                         <span className='read-eula' onClick={() => setDisplayEULA(true)}>Read</span>
                     </div>
-                    <Button styleName='primary submit' disabled={!enableSubmit()}
+                    <Button styleName='primary submit default-color' disabled={!enableSubmit()}
                         onClick={registerUser}>Submit</Button>
                 </div>
                 <div className='flex-wrapper-column'>

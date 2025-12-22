@@ -10,9 +10,9 @@ div.modal-container {
   }
 div.modal {
     align-items: center;
-    background-color: rgb(250, 239, 226);
-    border: 1px solid var(--secondary-color);
-    color: var(--secondary-color);
+    background-color: color-mix(in oklch, white 90%, var(--primary-logo-color) 10%);
+    border: 1px solid var(--secondary-logo-color);
+    color: var(--secondary-logo-color);
     display: flex;
     flex-direction: column;
     font-size: var(--font-small); 

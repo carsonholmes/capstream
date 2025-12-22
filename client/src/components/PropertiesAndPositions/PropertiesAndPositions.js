@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react'
 import { AppContext } from '../../AppContext'
 import ContentContainer from '../ContentContainer/ContentContainer'
-import Card from '../Card/Card'
+// import Card from '../Card/Card'
 import TextBox, { REGEX_CURRENCY, REGEX_PERCENT } from '../controls/TextBox/TextBox'
 import Button from '../controls/buttons/Button'
 import Select from '../controls/Select/Select'

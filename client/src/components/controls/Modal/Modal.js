@@ -17,9 +17,9 @@ const Modal = (props) => {
         <div className='modal-container' ref={refModalContainer} style={{top: containerTop}}>
             <div className={props.styleName ? `${props.styleName} modal` : 'modal'}>{props.children}
                 <div className='modal-button-container'>
-                    <Button styleName='primary modal' onClick={props.onClick}>{props.buttonText}</Button>
+                    <Button styleName='primary modal default-color' onClick={props.onClick}>{props.buttonText}</Button>
                     {props.buttonTwoText &&
-                        <Button styleName='primary modal' onClick={props.onClickTwo}>{props.buttonTwoText}</Button>}
+                        <Button styleName='primary modal default-color' onClick={props.onClickTwo}>{props.buttonTwoText}</Button>}
                 </div>
             </div>
             <div className='hazy-div'></div>

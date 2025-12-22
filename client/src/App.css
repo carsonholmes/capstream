@@ -2,10 +2,13 @@
     --border: 1px solid lightgrey;
     --border-radius: 5px;
     --button-border-radius: 20px;
-    --primary-color: oklch(60.33% 0.069 207.01);
+    --client-color: var(--primary-logo-color);   /* default client color if not set */
+    --primary-logo-color: oklch(60.33% 0.069 207.01);
+    --secondary-logo-color: oklch(0.26 0.06 244.87);
+    --primary-color: var(--primary-logo-color);
     --primary-offset-color: oklch(73.269% 0.06752 206.961);
     --primary-muted-color: hsl(120, 20%, 80%);
-    --secondary-color: hsl(205, 83%, 14%);
+    --secondary-color: oklch(60.33% 0.08 265);
     --secondary-offset-color: hsl(240, 54%, 61%);
     --highlight-selected-color: hsl(200, 100%, 50%);
     --tertiary-color: hsl(240, 70%, 91%);
@@ -27,6 +30,7 @@
     --font-xx-large: clamp(4rem, 5vw, 5rem);
     --drop-shadow: drop-shadow(.25rem .25rem .15rem rgb(165, 165, 165));
     --drop-shadow-small: drop-shadow(.1rem .1rem .1rem rgb(165, 165, 165));
+    color-scheme: light dark;
     height: 100%;
     width: 100%;
 }
@@ -44,9 +48,9 @@
     word-break: break-word;
 }
 
-/* .text-align-left {
+.text-align-left {
     text-align: left;
-} */
+}
 
 html,
 body {
@@ -177,7 +181,6 @@ div.flex-wrapper-row {
         flex-wrap: nowrap;
     }
 }
-
 
 h2 {
     font-size: var(--font-larger);
@@ -393,7 +396,7 @@ label.input-label {
     background-color: white;
     color: #136b13;
     cursor: text;
-    font-size: 1rem;
+    font-size: 1rem; 
     font-weight: 400;
     left: 50%;
     padding: 0 4px;

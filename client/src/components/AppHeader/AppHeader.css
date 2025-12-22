@@ -29,8 +29,8 @@ header.app-logo {
   height: 40px;
   margin-right: 10px;
   border-radius: 50%;
-  background-color: var(--header-text-color);
-  color: var(--header-bg-color);
+  background-color: var(--primary-color);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;

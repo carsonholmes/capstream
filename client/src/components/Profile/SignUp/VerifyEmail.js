@@ -74,7 +74,7 @@ const VerifyEmail = (props) => {
                 <TextBox id='emailVerifyCode' dataCol='emailVerifyCode' value={emailVerifyCode} placeholder='Verify Code'
                     onChange={updateVerifyCode}></TextBox>
                 {didCodeFail && <div className='input-error'>Invalid code entered.</div>}
-                <Button styleName='primary submit' disabled={!isSixNums}
+                <Button styleName='primary submit default-color' disabled={!isSixNums}
                     onClick={verifyEmail}>Submit</Button>
                 <br />
                 <NavLink styleName='page-link' onClick={resendEmail}>Resend verification email?</NavLink>

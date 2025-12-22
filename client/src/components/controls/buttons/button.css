@@ -8,6 +8,11 @@ div.button-container {
 
 button.standard {
     --button-primary-width: min(22vw, 140px);
+    --button-color: oklch(from var(--client-color) calc(l * .9) c calc(h + 180));
+    --button-color-hover: oklch(from var(--button-color) calc(l * .8) c h);
+    background: linear-gradient(90deg, var(--button-color-hover), var(--button-color-hover), var(--button-color), var(--button-color)) 99% 0/400%;
+    /* background-color: var(--client-color, var(--primary-color)); */
+
     border: none;
     border-radius: var(--button-border-radius);
     color: white;
@@ -22,7 +27,8 @@ button.standard {
 }
 
 button.primary {
-    background: linear-gradient(90deg, var(--primary-color), var(--primary-color), var(--secondary-color), var(--secondary-color)) 99% 0/400%;
+    /* To Do: remove this class from buttons when sure not needed */
+    /* background: linear-gradient(90deg, var(--primary-color), var(--primary-color), var(--secondary-color), var(--secondary-color)) 99% 0/400%; */
 }
 
 button.standard:hover {
@@ -30,6 +36,14 @@ button.standard:hover {
     box-shadow: none;
     cursor: pointer;
     transform: none;
+}
+
+button.default-color:not(.disabled) {
+    background: linear-gradient(90deg, var(--primary-logo-color), var(--primary-logo-color), var(--secondary-logo-color), var(--secondary-logo-color)) 99% 0/400% !important;
+}
+
+button.default-color:hover {
+    background-position: 0 !important;
 }
 
 button.sign-cancel {
