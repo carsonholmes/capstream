@@ -2,8 +2,7 @@
     --border: 1px solid lightgrey;
     --border-radius: 5px;
     --button-border-radius: 20px;
-    --client-color: var(--primary-logo-color);   /* default client color if not set */
-    --primary-logo-color: oklch(60.33% 0.069 207.01);
+    --primary-logo-color: oklch(60.335% 0.0686 207.059);
     --secondary-logo-color: oklch(0.26 0.06 244.87);
     --primary-color: var(--primary-logo-color);
     --primary-offset-color: oklch(73.269% 0.06752 206.961);
@@ -14,7 +13,6 @@
     --tertiary-color: hsl(240, 70%, 91%);
     --tertiary-highlight-color: hsl(240, 50%, 91%);
     --quartary-color: hsl(33, 100%, 50%);
-    --background-color: color-mix(in oklch, white 90%, var(--primary-color) 10%);
     --delete-color: hsl(300, 70%, 25%);
     --cancel-color: hsl(0, 70%, 40%);
     --cancel-color-hover: hsl(0, 70%, 50%);
@@ -33,6 +31,11 @@
     color-scheme: light dark;
     height: 100%;
     width: 100%;
+}
+
+.color-theme-applier {
+  --background-color: color-mix(in oklch, white 95%, var(--client-color) 5%);
+  --button-color: oklch(from var(--client-color) calc(l * .9) c calc(h + 180));
 }
 
 *,
@@ -71,6 +74,7 @@ select {
 div.grid-wrapper {
     align-items: center;
     background-color: var(--background-color);
+    /* background-color: var(--client-color); */
     border: var(--border);
     border-radius: var(--border-radius);
     display: grid;
@@ -86,7 +90,7 @@ div.grid-wrapper {
         grid-column: 1 / span 1;
     }
     & h2 {
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
     }
     & h3 {
         margin: -2rem 0 -1.25rem
@@ -183,14 +187,22 @@ div.flex-wrapper-row {
 }
 
 h2 {
-    font-size: var(--font-larger);
+    font-size: var(--font-large);
 }
 
 h3 {
-    font-size: var(--font-medium-large);
+    font-size: var(--font-medium);
     padding-bottom: 1rem;
 }
 
+.attachments-drop {
+    background: var(--input-bg-color, #fafafa);
+    border: 2px dashed var(--panel-border-color, hsl(0 0% 85%));
+    border-radius: var(--border-radius);
+    color: var(--muted-black, #555);
+    font-size: var(--font-medium);
+    padding: 0.75rem;
+}
 
 
 /* Dark Mode Styles */

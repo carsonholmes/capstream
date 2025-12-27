@@ -140,17 +140,19 @@ const PropertiesAndPositions = () => {
     }
 
     const renderRecordOptionLabel = (r) => `${r.propertyName} — ${r.sponsorGP}`
-    const bg = appContext?.activeBackground || '#f5f5f5'
+    // const bg = appContext?.activeBackground || '#f5f5f5'
 
     // ---- render -----------------------------------------------------------------
     return (
         <ContentContainer>
-            <div className='flex-wrapper-row' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>
+            {/* <div className='flex-wrapper-row' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}> */}
+            <div className='flex-wrapper-row'>
                 <Select id='existingRecord' dataCol='existingRecord' label='Select a Position to Edit' type='text' value={selectedId ?? -1} onChange={(col, v) => setSelectedId(v === -1 ? null : String(v))}
                     data={[{ value: -1, caption: 'Select a Property & Position record to edit' }, ...records.map(r => ({ value: String(r.idEntity), caption: renderRecordOptionLabel(r) }))]} />
                 <Button styleName='primary sign-in home' onClick={clearForm}>Add New</Button>
             </div>
-            <div className='grid-wrapper' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>
+            {/* <div className='grid-wrapper' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}> */}
+            <div className='grid-wrapper'>
                 <h2 style={{marginBottom: '1rem'}}>{row.idEntity ? 'Edit Property & Position' : 'Create Property + Position'}</h2>
                 <h3>Property</h3>
                 <TextBox id='propertyName' dataCol='propertyName' value={row.propertyName} placeholder='Name' onChange={update} onSubmit={onSave} />
@@ -165,7 +167,8 @@ const PropertiesAndPositions = () => {
                 <DatePicker id='investmentDate' dataCol='investmentDate' placeholder='Investment Date' value={row.investmentDate || null} onChange={update} />
                 <div className='ownership-and-help'>
                     <TextBox id='ownershipPct' dataCol='ownershipPct' value={row.ownershipPct ?? ''} placeholder='Ownership %' onChange={update} onSubmit={onSave} type='number' step='0.01' regex={REGEX_PERCENT} />
-                    <span className='pap-help' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>Leave blank if unknown or single-investor</span>
+                    {/* <span className='pap-help' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>Leave blank if unknown or single-investor</span> */}
+                    <span className='pap-help'>Leave blank if unknown or single-investor</span>
                 </div>
                 <TextBox id='prefReturnPct' dataCol='prefReturnPct' value={row.prefReturnPct ?? ''} placeholder='Preferred return (%)' onChange={update} onSubmit={onSave} type='number' step='0.01' regex={REGEX_PERCENT} />
                 <Select id='distributionCadence' dataCol='distributionCadence' type='text' value={row.distributionCadence || 'Monthly'} label='Distribution cadence' onChange={update}
@@ -184,8 +187,9 @@ const PropertiesAndPositions = () => {
                 <br />
                 <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>{isSaving ? 'Saving…' : 'Save'}</Button>
             </div>
-            <div className='flex-wrapper-column' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>
-                <div className='pap-drop'>Drop OM PDF here (optional)</div>
+            {/* <div className='flex-wrapper-column' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}> */}
+            <div className='flex-wrapper-column'>
+                <div className='attachments-drop'>Drop OM PDF here (optional)</div>
                 <input type='file' onChange={onFilePick} />
                 {row.attachments?.length > 0 && (
                     <ul className='pap-files'>

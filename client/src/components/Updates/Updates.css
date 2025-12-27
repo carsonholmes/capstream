@@ -47,7 +47,7 @@ div.updates-wrapper div.text-area-container {
     }
 }
 
-div.updates-attachments {
+/* div.updates-attachments {
     align-items: center;
     border: var(--border);
     border-radius: var(--border-radius);
@@ -59,17 +59,16 @@ div.updates-attachments {
     margin-bottom: 2rem;
     padding: 1rem;
     width: 90%;
-}
+} */
 
-.updates-drop {
+/* .updates-drop {
     background: var(--input-bg-color, #fafafa);
     border: 2px dashed var(--panel-border-color, hsl(0 0% 85%));
     border-radius: var(--border-radius);
     color: var(--muted-black, #555);
     font-size: var(--font-medium-large);
     padding: 0.75rem;
-}
-
+} */
 
 /* Root */
 .Updates {

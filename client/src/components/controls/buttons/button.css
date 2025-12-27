@@ -8,7 +8,7 @@ div.button-container {
 
 button.standard {
     --button-primary-width: min(22vw, 140px);
-    --button-color: oklch(from var(--client-color) calc(l * .9) c calc(h + 180));
+    /* --button-color: oklch(from var(--client-color) calc(l * .9) c calc(h + 180)); */
     --button-color-hover: oklch(from var(--button-color) calc(l * .8) c h);
     background: linear-gradient(90deg, var(--button-color-hover), var(--button-color-hover), var(--button-color), var(--button-color)) 99% 0/400%;
     /* background-color: var(--client-color, var(--primary-color)); */

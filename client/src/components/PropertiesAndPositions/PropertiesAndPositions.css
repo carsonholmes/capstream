@@ -28,16 +28,14 @@ div.ownership-and-help {
     }
 }
 
-.pap-drop {
+/* .pap-drop {
     background: var(--input-bg-color, #fafafa);
     border: 2px dashed var(--panel-border-color, hsl(0 0% 85%));
     border-radius: var(--border-radius);
     color: var(--muted-black, #555);
     font-size: var(--font-medium-large);
     padding: 0.75rem;
-}
-
-
+} */
 
 
 

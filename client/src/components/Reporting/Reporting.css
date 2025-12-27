@@ -1,0 +1,101 @@
+.reporting-container {
+    max-width: 95%;
+    padding: 20px;
+    @media (min-width: 900px) {
+        max-width: 90%;
+    }
+}
+
+.radio-buttons {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.radio-buttons input {
+    margin-right: 0.5rem;
+}
+
+.radio-buttons label {
+    cursor: pointer;
+    font-size: var(--font-medium-large);
+    margin-right: 2rem;
+    text-transform: capitalize;
+}
+
+.cashflow-grid {
+    display: grid;
+    /* 1. Column 1: Fit the longest property name
+       2. Dynamic Columns: Fit the longest currency value in each
+       3. Last Column: Fit the total
+    */
+    grid-template-columns: 
+        max-content 
+        repeat(var(--col-count), max-content) 
+        max-content;
+    
+    border: 1px solid #ccc;
+    overflow-x: auto; /* This is crucial for the scrollbar to appear */
+    width: 100%;     /* Ensure it fills the container */
+}
+
+.grid-cell {
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+    font-size: var(--font-medium);
+    min-width: fit-content;
+    padding: 12px 15px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Header Styles */
+.header {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #333;
+}
+
+.prop-name {
+    text-align: left;
+    font-weight: 500;
+    background-color: #fafafa;
+}
+
+/* Keep the first column (Property Names) visible while scrolling right */
+.prop-name, 
+.grid-cell.header:first-child,
+.grid-cell.footer:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: #fff; /* Must have a solid background to cover cells sliding under */
+    border-right: 2px solid #ccc;
+}
+
+/* Keep the Header row visible while scrolling down */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+/* Totals Styling */
+.total-col {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.footer {
+    background-color: #eee;
+    font-weight: bold;
+    border-top: 2px solid #333;
+    border-bottom: none;
+}
+
+.data-cell:hover {
+    background-color: #fff8e1;
+}

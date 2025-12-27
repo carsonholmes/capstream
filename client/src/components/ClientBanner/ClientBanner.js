@@ -17,7 +17,8 @@ function getContrastTextColor(hex) {
 
 // Static tabs: no hook needed
 const TABS = [
-  { key: 'home', label: 'Home' },
+//   { key: 'home', label: 'Reporting' },
+  { key: 'reporting', label: 'Reporting' },
   { key: 'positions', label: 'Positions' },
   { key: 'updates', label: 'Updates' },
   { key: 'cash-activity', label: 'Cash Activity' },

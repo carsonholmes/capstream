@@ -13,7 +13,7 @@ const ColorApplier = ({ children }) => {
   const clientColor = appContext.activeColor || '#4b8d96';
 
   return (
-    <div style={{ '--client-color': clientColor }}>
+    <div className="color-theme-applier" style={{ '--client-color': clientColor }}>
       {children}
     </div>
   );

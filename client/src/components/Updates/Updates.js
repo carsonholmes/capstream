@@ -168,7 +168,7 @@ const Updates = () => {
         setSelectedPropertyId(u.propertyId)
     }
 
-    const bg = appContext?.activeBackground || '#f5f5f5'
+    // const bg = appContext?.activeBackground || '#f5f5f5'
 
     // format ISO/Date-ish strings to local date (short)
     const fmtDate = (d) => {
@@ -184,7 +184,8 @@ const Updates = () => {
 
     return (
         <ContentContainer>
-            <div className='flex-wrapper-row' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>
+            {/* <div className='flex-wrapper-row' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}> */}
+            <div className='flex-wrapper-row'>
                 <Select
                     id='propertySelect'
                     dataCol='propertyId'
@@ -197,7 +198,8 @@ const Updates = () => {
                 <Button styleName='primary sign-in home' onClick={clearForm} disabled={!selectedPropertyId}>New Update</Button>
             </div>
 
-            <div className='grid-wrapper' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>
+            {/* <div className='grid-wrapper' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}> */}
+            <div className='grid-wrapper'>
                 <h2>{row.id ? 'Edit Update' : 'Create Update'}</h2>
                 <DatePicker id='updateDate' dataCol='updateDate' placeholder='Update date' value={row.updateDate || null} onChange={update} disabled={!selectedPropertyId} />
                 <DatePicker id='revisedSaleDate' dataCol='revisedSaleDate' placeholder='Revised sale date' value={row.revisedSaleDate || null} onChange={update} disabled={!selectedPropertyId} />
@@ -214,8 +216,9 @@ const Updates = () => {
                 <TextArea id='notes' dataCol='notes' value={row.notes} placeholder='Notes (capex/occupancy, etc.)' onChange={update} disabled={!selectedPropertyId} />
             </div>
 
-            <div className='updates-attachments' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}>
-                <div className='updates-drop'>Drop pdf/image/email</div>
+            {/* <div className='updates-attachments' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)` }}> */}
+            <div className='flex-wrapper-column'>
+                <div className='attachments-drop'>Drop pdf/image/email</div>
                 <input type='file' onChange={onFilePick} disabled={!selectedPropertyId || !row.id} />
                 {row.attachment && (
                     <div className='updates-fileline'>Attached: {row.attachment.name} <span className='updates-file-meta'>({row.attachment.size} bytes)</span></div>
@@ -225,7 +228,8 @@ const Updates = () => {
             <Button styleName='primary submit' disabled={!canSubmit} onClick={onSave}>{isSaving ? 'Saving…' : 'Save Update'}</Button>
 
             {/* Timeline */}
-            <div className='flex-wrapper-column' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)`, marginTop: '2rem' }}>
+            {/* <div className='flex-wrapper-column' style={{ backgroundColor: `color-mix(in oklch, white 95%, ${bg} 5%)`, marginTop: '2rem' }}> */}
+            <div className='flex-wrapper-column' style={{ marginTop: '2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-evenly', padding: '0 1rem', width: '100%' }}>
                     <h2>Previous updates (timeline)</h2>
                     <Button styleName='primary' onClick={() => clearForm()} disabled={!selectedPropertyId}>Add New</Button>

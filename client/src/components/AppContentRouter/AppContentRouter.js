@@ -4,6 +4,7 @@ import {AppContext} from '../../AppContext'
 import Home from '../Home/Home'
 import About from '../About/About'
 import Dashboard from '../Dashboard/Dashboard'
+import Reporting from '../Reporting/Reporting'
 import PropertiesAndPositions from '../PropertiesAndPositions/PropertiesAndPositions'
 import Updates from '../Updates/Updates'
 import CashActivity from '../CashActivity/CashActivity'
@@ -75,12 +76,12 @@ const AppContentRouter = (props) => {
                 setTimeout(scrollToTop, 1);
                 return <Clients />;
                 }
-            case 'home':
+            case 'reporting':
                 if (appContext.signedIn) {
                     if (appContext.activeClient && appContext.activeClientName !== "") {
                         return <>
                             <ClientBanner/>
-                            <Dashboard/>
+                            <Reporting/>
                         </>
                     }
                     else return <Clients/>
