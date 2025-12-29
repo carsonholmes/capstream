@@ -26,6 +26,8 @@
 }
 
 .cashflow-grid {
+    border: var(--border);
+    border-radius: var(--border-radius);
     display: grid;
     /* 1. Column 1: Fit the longest property name
        2. Dynamic Columns: Fit the longest currency value in each
@@ -36,7 +38,6 @@
         repeat(var(--col-count), max-content) 
         max-content;
     
-    border: 1px solid #ccc;
     overflow-x: auto; /* This is crucial for the scrollbar to appear */
     width: 100%;     /* Ensure it fills the container */
 }

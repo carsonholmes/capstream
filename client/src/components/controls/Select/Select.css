@@ -5,13 +5,13 @@ label.label-as-placeholder {
     cursor: text;
     color: gray;
     display: table;
-    font-size: var(--font-small);
+    font-size: var(--font-x-small);
     font-weight: 400;
     left: 50%;
     margin: auto;
     padding: 0 4px;
     position: absolute;
-    top: .4rem;
+    top: .6rem;
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
     transition:

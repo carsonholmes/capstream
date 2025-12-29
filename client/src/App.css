@@ -3,7 +3,9 @@
     --border-radius: 5px;
     --button-border-radius: 20px;
     --primary-logo-color: oklch(60.335% 0.0686 207.059);
+    --primary-logo-color-light: oklch(70% 0.0686 207.059);
     --secondary-logo-color: oklch(0.26 0.06 244.87);
+    --secondary-logo-color-light: oklch(.5 0.06 244.87);
     --primary-color: var(--primary-logo-color);
     --primary-offset-color: oklch(73.269% 0.06752 206.961);
     --primary-muted-color: hsl(120, 20%, 80%);
@@ -200,60 +202,8 @@ h3 {
     border: 2px dashed var(--panel-border-color, hsl(0 0% 85%));
     border-radius: var(--border-radius);
     color: var(--muted-black, #555);
-    font-size: var(--font-medium);
+    font-size: var(--font-small);
     padding: 0.75rem;
-}
-
-
-/* Dark Mode Styles */
-.dark-mode {
-    --header-bg-color: #1a1a1a;
-    /* Off black */
-    --header-text-color: white;
-    --input-bg-color: #1f1f1f;
-    --button-icon-color: white;
-    --icon-color: white;
-    --user-message-color: #add8e6;
-    /* Hint of blue */
-    --app-message-color: white;
-    background-color: #070707;
-    /* Off white that is darker than header and footer */
-    color: white;
-}
-
-main.dark-mode {
-    --header-bg-color: #1a1a1a;
-    /* Off black */
-    --header-text-color: white;
-    --input-bg-color: #1f1f1f;
-    --button-icon-color: white;
-    --icon-color: white;
-    --user-message-color: #add8e6;
-    /* Hint of blue */
-    --app-message-color: white;
-    background-color: #070707;
-    /* Off white that is darker than header and footer */
-    color: white;
-}
-
-/* Light Mode Styles */
-.light-mode {
-    --header-bg-color: #f2f2f2;
-    /* Off white */
-    --header-text-color: black;
-    --input-bg-color: white;
-    --button-icon-color: darkgrey;
-    --icon-color: rgb(58, 58, 58);
-    --user-message-color: navy;
-    --app-message-color: black;
-    background-color: white;
-    color: black;
-}
-
-/* Updated Dark Mode Styles for App-input */
-.dark-mode .App-input {
-    background-color: #1a1a1a;
-    /* Same as header background color in dark mode */
 }
 
 ::selection {
@@ -261,24 +211,28 @@ main.dark-mode {
     color: var(--secondary-color);
 }
 
-::-webkit-scrollbar {
+/* Global scrollbar styling for all scrollable elements */
+/* ::-webkit-scrollbar,
+*::-webkit-scrollbar {
     height: .75rem;
     width: .75rem;
 }
 
-::-webkit-scrollbar-track {
-    background: hsl(120, 20%, 80%);
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+    background: oklch(90% 0.0686 207.059);
 }
 
-::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border: 1px solid hsl(120, 20%, 80%);
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+    background: #9ec3e2;
     border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color);
-}
+::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+    background: #ff0000;
+} */
 
 /* div.app {
     text-align: center;
@@ -351,10 +305,10 @@ div.input-container {
     border: 1px solid gray;
     border-radius: 3px;
     box-shadow: 0 0 0px 1000px white inset;
-    font-size: 1.5rem;
+    font-size: var(--font-x-small);
     height: 2.3rem;
     outline: none;
-    /* padding-top: .25rem; */
+    padding-top: .2rem;
     text-overflow: ellipsis;
     width: 100%;
 }
@@ -375,14 +329,13 @@ label.input-label {
     cursor: text;
     color: grey;
     display: table;
-    /* font-size: var(--font-medium); */
-    font-size: var(--font-small);
+    font-size: var(--font-x-small);
     font-weight: 400;
     left: 50%;
     margin: auto;
     padding: 0 4px;
     position: absolute;
-    top: .4rem;
+    top: .6rem;
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
     transition:
@@ -443,4 +396,57 @@ input:-webkit-autofill::first-line {
 
 input.checkbox {
     margin-top: 0;    
+}
+
+
+
+/* Dark Mode Styles */
+.dark-mode {
+    --header-bg-color: #1a1a1a;
+    /* Off black */
+    --header-text-color: white;
+    --input-bg-color: #1f1f1f;
+    --button-icon-color: white;
+    --icon-color: white;
+    --user-message-color: #add8e6;
+    /* Hint of blue */
+    --app-message-color: white;
+    background-color: #070707;
+    /* Off white that is darker than header and footer */
+    color: white;
+}
+
+main.dark-mode {
+    --header-bg-color: #1a1a1a;
+    /* Off black */
+    --header-text-color: white;
+    --input-bg-color: #1f1f1f;
+    --button-icon-color: white;
+    --icon-color: white;
+    --user-message-color: #add8e6;
+    /* Hint of blue */
+    --app-message-color: white;
+    background-color: #070707;
+    /* Off white that is darker than header and footer */
+    color: white;
+}
+
+/* Light Mode Styles */
+.light-mode {
+    --header-bg-color: #f2f2f2;
+    /* Off white */
+    --header-text-color: black;
+    --input-bg-color: white;
+    --button-icon-color: darkgrey;
+    --icon-color: rgb(58, 58, 58);
+    --user-message-color: navy;
+    --app-message-color: black;
+    background-color: white;
+    color: black;
+}
+
+/* Updated Dark Mode Styles for App-input */
+.dark-mode .App-input {
+    background-color: #1a1a1a;
+    /* Same as header background color in dark mode */
 }
