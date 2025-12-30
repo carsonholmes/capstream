@@ -26,7 +26,7 @@ const Reporting = () => {
     const [view, setView] = useState('annual');
 
     // Helper to format currency
-    const formatCurrency = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val || 0);
+    const formatCurrency = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val || 0);
 
     // Configuration for dynamic mapping
     const getConfig = () => {
