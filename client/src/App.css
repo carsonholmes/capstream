@@ -1,9 +1,11 @@
-#root {
+#root,
+:root {
     --border: 1px solid lightgrey;
     --border-radius: 5px;
     --button-border-radius: 20px;
     --primary-logo-color: oklch(60.335% 0.0686 207.059);
     --primary-logo-color-light: oklch(70% 0.0686 207.059);
+    --primary-logo-color-lighter: oklch(90% 0.0686 207.059);
     --secondary-logo-color: oklch(0.26 0.06 244.87);
     --secondary-logo-color-light: oklch(.5 0.06 244.87);
     --primary-color: var(--primary-logo-color);
@@ -210,37 +212,6 @@ h3 {
     background-color: var(--primary-offset-color);
     color: var(--secondary-color);
 }
-
-/* Global scrollbar styling for all scrollable elements */
-/* ::-webkit-scrollbar,
-*::-webkit-scrollbar {
-    height: .75rem;
-    width: .75rem;
-}
-
-::-webkit-scrollbar-track,
-*::-webkit-scrollbar-track {
-    background: oklch(90% 0.0686 207.059);
-}
-
-::-webkit-scrollbar-thumb,
-*::-webkit-scrollbar-thumb {
-    background: #9ec3e2;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover,
-*::-webkit-scrollbar-thumb:hover {
-    background: #ff0000;
-} */
-
-/* div.app {
-    text-align: center;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-} */
 
 div.input-policy {
     color: rgb(173, 169, 169);
@@ -449,4 +420,31 @@ main.dark-mode {
 .dark-mode .App-input {
     background-color: #1a1a1a;
     /* Same as header background color in dark mode */
+}
+
+/* Custom scrollbars */
+/* Apply to document and main app container so page scrollbar inherits variables */
+html, body, #root, .App {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-logo-color) var(--primary-logo-color-lighter);
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-logo-color-lighter);
+}
+
+::-webkit-scrollbar-thumb {
+    /* -webkit-appearance: none; */
+    background-color: var(--primary-logo-color);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-logo-color);
 }

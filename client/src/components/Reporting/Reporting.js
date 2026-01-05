@@ -23,7 +23,7 @@ const dummyData = [
 
 const Reporting = () => {
     const { appContext } = React.useContext(AppContext);
-    const [view, setView] = useState('annual');
+    const [view, setView] = useState('monthly');
 
     // Helper to format currency
     const formatCurrency = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val || 0);
@@ -86,7 +86,7 @@ const Reporting = () => {
 
                 <div className="cashflow-grid" style={{ '--col-count': periods.length }}>
                     {/* Header Row */}
-                    <div className="grid-cell header">Property</div>
+                    <div className="grid-cell header prop-name">Property</div>
                     {periods.map(p => <div key={p} className="grid-cell header">{p}</div>)}
                     <div className="grid-cell header total-col">Total</div>
 
@@ -106,7 +106,7 @@ const Reporting = () => {
                     ))}
 
                     {/* Footer Total Row */}
-                    <div className="grid-cell footer">Total</div>
+                    <div className="grid-cell footer prop-name">Total</div>
                     {periods.map((period) => (
                         <div key={period} className="grid-cell footer">
                             {formatCurrency(getColumnTotal(period))}

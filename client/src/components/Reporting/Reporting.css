@@ -67,13 +67,21 @@
 }
 
 /* Keep the first column (Property Names) visible while scrolling right */
-.prop-name, 
-.grid-cell.header:first-child,
-.grid-cell.footer:first-child {
+.prop-name {
     position: sticky;
     left: 0;
-    z-index: 2;
-    background-color: #fff; /* Must have a solid background to cover cells sliding under */
+    z-index: 3;
+    background-color: #fafafa;
+    border-right: 2px solid #ccc;
+}
+
+/* Corner cells (first header/footer) need both top and left sticky and higher z-index */
+.grid-cell.header.prop-name,
+.grid-cell.footer.prop-name {
+    position: sticky;
+    left: 0;
+    z-index: 6;
+    background-color: #fff; /* cover underlying cells when stuck */
     border-right: 2px solid #ccc;
 }
 
@@ -95,8 +103,4 @@
     font-weight: bold;
     border-top: 2px solid #333;
     border-bottom: none;
-}
-
-.data-cell:hover {
-    background-color: #fff8e1;
 }
